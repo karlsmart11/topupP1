@@ -10,6 +10,9 @@ namespace GTLSystem
     {
         static void Main(string[] args)
         {
+
+
+
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
