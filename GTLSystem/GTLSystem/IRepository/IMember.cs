@@ -10,5 +10,6 @@ namespace GTLSystem.IRepository
         void Insert(Member member);
         int Update(Member member);
         int Delete(Member member);
+        Member GetBySSN(string SSN);
     }
 }

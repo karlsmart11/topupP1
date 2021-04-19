@@ -1,7 +1,9 @@
-﻿using GTLSystem.IRepository;
+﻿using Dapper;
+using GTLSystem.IRepository;
 using GTLSystem.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace GTLSystem.Repository
@@ -11,6 +13,18 @@ namespace GTLSystem.Repository
         public int Delete(Member member)
         {
             throw new NotImplementedException();
+        }
+
+        public Member GetBySSN(string memberSSN)
+        {
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            string query = @"SELECT * FROM [dbo].[Member] where SSN = " + memberSSN;
+
+            return con.QueryFirst<Member>(query);
         }
 
         public void Insert(Member member)
