@@ -28,7 +28,7 @@ namespace GTLSystem.Repository
            ,[StartDate]
            ,[MemberSSN])";
 
-            var result = con.Execute(insertQuery, loan);
+            //var result = con.Execute(insertQuery, loan);
         }
 
         public int Update(Loan loan)

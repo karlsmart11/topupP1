@@ -5,10 +5,11 @@ using System.Text;
 
 namespace GTLSystem.TUI
 {
-    class Tui
+    static class Tui
     {
-        MemberController memberController = new MemberController();
-        public void Start()
+        static MemberController memberController = new MemberController();
+
+        public static void Start()
         {
             Console.WriteLine("Georgia Tech Library Reservation system Inc.");
             bool status = Login();
@@ -19,7 +20,7 @@ namespace GTLSystem.TUI
             }
         }
 
-        private bool Login()
+        private static bool Login()
         {
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
@@ -29,7 +30,7 @@ namespace GTLSystem.TUI
             return memberController.CheckSSN(SSN);            
         }
 
-        private void MainMenu()
+        private static void MainMenu()
         {
             Console.WriteLine("Georgia Tech Library Reservation system Inc.");
             Console.WriteLine("Option 1: ");

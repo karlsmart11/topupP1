@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GTLSystem.Model;
 using GTLSystem.Repository;
+using GTLSystem.TUI;
 using System;
 using System.Data.SqlClient;
 
@@ -10,14 +11,7 @@ namespace GTLSystem
     {
         static void Main(string[] args)
         {
-            var repo = new LoanRepository();
-            var loan = new Loan();
-
-            loan.StartDate = DateTime.Now;
-
-            repo.Insert(loan);
-
-            Console.WriteLine("inserted");
+            Tui.Start();
         }
     }
 }
