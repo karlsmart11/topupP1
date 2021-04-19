@@ -8,20 +8,21 @@ namespace GTLSystem.TUI
     static class Tui
     {
         static MemberController memberController = new MemberController();
+        static LoanController loanController = new LoanController();
 
         public static void Start()
         {
             MainMenu();
         }
 
-        private static bool CreateLoan()
+        private static void CreateLoan()
         {
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
 
-            Console.Clear();
+            loanController.RegisterLoan(SSN);
 
-            return memberController.CheckSSN(SSN);            
+            Console.Clear();         
         }
 
         private static void MainMenu()
@@ -45,16 +46,17 @@ namespace GTLSystem.TUI
 
                 switch (option)
                 {
-                    case 1: 
+                    case 1:
                         CreateLoan();
-                        break;
+                        return;
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Console.Clear();
                 Console.WriteLine("Invalid Menu Entry");
+                Console.WriteLine(e);
                 Console.ReadLine();
                 MainMenu();
             }            

@@ -7,5 +7,6 @@ namespace GTLSystem.Model
     class Loan
     {
         public DateTime StartDate { get; set; }
+        public string MemberSSN { get; set; }
     }
 }

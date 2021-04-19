@@ -23,12 +23,15 @@ namespace GTLSystem.Repository
             using var con = new SqlConnection(cs);
             con.Open();
 
-            string insertQuery = @"INSERT INTO [dbo].[Loan]
-           ([Id]
-           ,[StartDate]
-           ,[MemberSSN])";
 
-            //var result = con.Execute(insertQuery, loan);
+            string insertQuery = @"INSERT INTO Loan
+           (StartDate
+           ,MemberSSN)
+            VALUES 
+           (@StartDate,
+            @MemberSSN)";
+
+            con.Execute(insertQuery, loan);
         }
 
         public int Update(Loan loan)
