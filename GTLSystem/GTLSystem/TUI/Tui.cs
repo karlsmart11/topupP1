@@ -20,8 +20,15 @@ namespace GTLSystem.TUI
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
 
-            loanController.RegisterLoan(SSN);
+            if (loanController.RegisterLoan(SSN))
+            {
+                Console.WriteLine("Loan registered successfully");
+            } else
+            {
+                Console.WriteLine("SSN not found");
+            }
 
+            Console.ReadLine();
             Console.Clear();         
         }
 
@@ -48,18 +55,20 @@ namespace GTLSystem.TUI
                 {
                     case 1:
                         CreateLoan();
-                        return;
+                        break;
                 }
 
             }
             catch (Exception e)
             {
                 Console.Clear();
-                Console.WriteLine("Invalid Menu Entry");
-                Console.WriteLine(e);
+                Console.WriteLine("Invalid Menu Entry");    
+                Console.WriteLine(e); //for debugging
                 Console.ReadLine();
                 MainMenu();
-            }            
+            }
+
+            MainMenu();
         }
     }
 }

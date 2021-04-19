@@ -17,6 +17,7 @@ namespace GTLSystem.Repository
 
         public Member GetBySSN(string memberSSN)
         {
+            Member result;
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
@@ -24,7 +25,16 @@ namespace GTLSystem.Repository
 
             string query = @"SELECT * FROM [dbo].[Member] where SSN = " + memberSSN;
 
-            return con.QueryFirst<Member>(query);
+            try
+            {
+                result = con.QueryFirst<Member>(query);
+            }
+            catch (Exception)
+            {
+                result = null;                
+            }
+
+            return result;
         }
 
         public void Insert(Member member)

@@ -11,17 +11,25 @@ namespace GTLSystem.Controller
         MemberRepository memberRepository = new MemberRepository();
         LoanRepository loanRepository = new LoanRepository();
 
-        public void RegisterLoan(String ssn)
+        public bool RegisterLoan(String ssn)
         {
+            bool result;
+
             Member member = memberRepository.GetBySSN(ssn);
 
-            Loan loan = new Loan()
+            if (member != null)
             {
-                StartDate = DateTime.Now,
-                MemberSSN = member.SSN                
-            };
+                Loan loan = new Loan()
+                {
+                    StartDate = DateTime.Now,
+                    MemberSSN = member.SSN
+                };
 
-            loanRepository.Insert(loan);
+                loanRepository.Insert(loan);
+                result = true;
+            } else result = false;
+
+            return result;
         }
     }
 }
