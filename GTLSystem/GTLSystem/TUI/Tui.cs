@@ -11,16 +11,10 @@ namespace GTLSystem.TUI
 
         public static void Start()
         {
-            Console.WriteLine("Georgia Tech Library Reservation system Inc.");
-            bool status = Login();
-
-            if (status)
-            {
-                MainMenu();
-            }
+            MainMenu();
         }
 
-        private static bool Login()
+        private static bool CreateLoan()
         {
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
@@ -47,11 +41,13 @@ namespace GTLSystem.TUI
 
             try
             {                
-                int option = int.Parse(Console.ReadLine());
+                int option = int.Parse(input);
 
                 switch (option)
                 {
-                    case 1: return;
+                    case 1: 
+                        CreateLoan();
+                        break;
                 }
 
             }
