@@ -6,6 +6,6 @@ namespace GTLSystem.Model
 {
     class Loan
     {
-        private DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }

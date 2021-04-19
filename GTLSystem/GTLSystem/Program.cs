@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using GTLSystem.Model;
+using GTLSystem.Repository;
 using System;
 using System.Data.SqlClient;
 
@@ -16,6 +18,15 @@ namespace GTLSystem
             var version = con.ExecuteScalar<string>("SELECT @@VERSION");
 
             Console.WriteLine(version);
+
+            var repo = new LoanRepository();
+            var loan = new Loan();
+
+            loan.StartDate = DateTime.Now;
+
+            repo.Insert(loan);
+
+            Console.WriteLine("inserted");
         }
     }
 }
