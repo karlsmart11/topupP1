@@ -6,10 +6,10 @@ namespace GTLSystem.Model
 {
     class Member
     {
-        private String SSN { get; set; }
-        private String Campus { get; set; }
-        private String Address { get; set; }
-        private String PhoneNumber { get; set; }
-        private DateTime CardExpDate { get; set; }
+        public String SSN { get; set; }
+        public String Campus { get; set; }
+        public String Address { get; set; }
+        public String PhoneNumber { get; set; }
+        public DateTime CardExpDate { get; set; }
     }
 }
