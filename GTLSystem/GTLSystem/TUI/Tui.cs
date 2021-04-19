@@ -32,6 +32,7 @@ namespace GTLSystem.TUI
 
         private static void MainMenu()
         {
+            Console.Clear();
             Console.WriteLine("Georgia Tech Library Reservation system Inc.");
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine("                Main menu");
@@ -56,7 +57,9 @@ namespace GTLSystem.TUI
             }
             catch (Exception)
             {
+                Console.Clear();
                 Console.WriteLine("Invalid Menu Entry");
+                Console.ReadLine();
                 MainMenu();
             }            
         }
