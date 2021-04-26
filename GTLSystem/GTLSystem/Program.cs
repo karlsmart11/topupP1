@@ -15,7 +15,7 @@ namespace GTLSystem
 
             TitleRepository titleRepository = new TitleRepository();
 
-            titleRepository.Delete("1234");
+            titleRepository.Delete("1234")
 
             //Title title = new Title
             //{

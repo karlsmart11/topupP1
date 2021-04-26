@@ -20,6 +20,16 @@ namespace GTLSystem.Repository
             return con.Execute(@"DELETE FROM [dbo].[Material] WHERE Id = " + materialId);
         }
 
+        public void GetAvailableByISBN(string titleISBN, bool available)
+        {
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            var materials = con.Query<Material>("GetAvailableMaterial", new { ISBN = titleISBN, Available = available }, commandType: System.Data.CommandType.StoredProcedure);
+        }
+
         public void Insert(Material material)
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
