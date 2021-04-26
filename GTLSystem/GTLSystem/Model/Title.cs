@@ -6,13 +6,13 @@ namespace GTLSystem.Model
 {
     class Title
     {
-        private String ISBN { get; set; }
-        private bool Requested { get; set; }
-        private String TitleName { get; set; }
-        private String Description { get; set; }
-        private bool Available { get; set; }
-        private String Author { get; set; }
-        private String Subject { get; set; }
-        private bool Loanable { get; set; }
+        public String ISBN { get; set; }
+        public bool Requested { get; set; }
+        public String TitleName { get; set; }
+        public String Description { get; set; }
+        public bool Available { get; set; }
+        public String Author { get; set; }
+        public String Subject { get; set; }
+        public bool Loanable { get; set; }
     }
 }

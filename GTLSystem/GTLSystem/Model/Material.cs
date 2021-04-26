@@ -6,7 +6,9 @@ namespace GTLSystem.Model
 {
     class Material
     {
-        private int MaterialId { get; set; }
-        private String Type { get; set; }
+        public int MaterialId { get; set; }
+        public String Type { get; set; }
+
+        public String ISBN { get; set; }
     }
 }

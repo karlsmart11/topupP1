@@ -11,7 +11,29 @@ namespace GTLSystem
     {
         static void Main(string[] args)
         {
-            Tui.Start();
+            //Tui.Start();
+
+            //TitleRepository titleRepository = new TitleRepository();
+
+            //Title title = new Title
+            //{
+            //    ISBN = "12345",
+            //    Requested = false,
+            //    TitleName = "God Titel",
+            //    Description = "God beskrivelse",
+            //    Available = true,
+            //    Author = "God Forfatter",
+            //    Subject = "Godt emne",
+            //    Loanable = true
+            //};
+
+            //titleRepository.Insert(title);
+
+            MaterialRepository materialRep = new MaterialRepository();
+
+            Material material = new Material { Type = "Book", ISBN = "1234" };
+
+            materialRep.Insert(material);
         }
     }
 }
