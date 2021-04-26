@@ -9,16 +9,46 @@ namespace GTLSystem.TUI
     {
         static MemberController memberController = new MemberController();
         static LoanController loanController = new LoanController();
+        static MaterialController materialController = new MaterialController();
 
         public static void Start()
         {
             MainMenu();
         }
 
-        private static void CreateLoan()
+        private static void RegisterLoan()
         {
+            Console.Clear();
+            Console.WriteLine("Georgia Tech Library Reservation system Inc.");
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("            Registering new loan");
+            Console.WriteLine("");
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
+
+            Console.WriteLine();
+            Console.WriteLine("Please enter up to 5 titles by ISBN or finish by typing 'done'");
+            string input;
+            var materials = new List<string>();
+
+            for (int i = 0; i < 5; i++)
+            {
+                input = Console.ReadLine();
+
+                if (input.ToLower().Equals("done"))
+                {
+                    i = 5;
+                }
+                else if (materialController.checkISBN(input))
+                {
+                    i--;
+                    Console.WriteLine("Material not found");
+                }
+                else
+                {
+                    materials.Add(input);
+                }
+            }
 
             // Check if loan has been registered
             if (loanController.RegisterLoan(SSN))
@@ -26,11 +56,11 @@ namespace GTLSystem.TUI
                 Console.WriteLine("Loan registered successfully");
             } else
             {
-                Console.WriteLine("SSN not found press any key to continue");
-                Console.WriteLine();
-                Console.WriteLine("Press any key to continue");
+                Console.WriteLine("Failed to register Loan");
             }
 
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue");
             Console.ReadKey();
             Console.Clear();         
         }
@@ -42,7 +72,7 @@ namespace GTLSystem.TUI
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine("                Main menu");
             Console.WriteLine("");
-            Console.WriteLine("1: Create Loan");
+            Console.WriteLine("1: Register Loan");
 
             string input = Console.ReadLine().ToLower();
             if(input.Equals("exit"))
@@ -58,7 +88,7 @@ namespace GTLSystem.TUI
                 switch (option)
                 {
                     case 1:
-                        CreateLoan();
+                        RegisterLoan();
                         break;
                 }
 

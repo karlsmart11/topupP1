@@ -8,5 +8,6 @@ namespace GTLSystem.Model
     {
         public DateTime StartDate { get; set; }
         public string MemberSSN { get; set; }
+        public List<Material> materials;
     }
 }
