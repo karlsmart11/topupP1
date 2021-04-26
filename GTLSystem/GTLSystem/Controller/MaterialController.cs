@@ -24,5 +24,10 @@ namespace GTLSystem.Controller
 
             return result;
         }
+
+        internal bool checkISBN(string input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
