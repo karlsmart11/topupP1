@@ -20,15 +20,18 @@ namespace GTLSystem.TUI
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
 
+            // Check if loan has been registered
             if (loanController.RegisterLoan(SSN))
             {
                 Console.WriteLine("Loan registered successfully");
             } else
             {
-                Console.WriteLine("SSN not found");
+                Console.WriteLine("SSN not found press any key to continue");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue");
             }
 
-            Console.ReadLine();
+            Console.ReadKey();
             Console.Clear();         
         }
 
@@ -47,6 +50,7 @@ namespace GTLSystem.TUI
                 return;
             }
 
+            // Check if input is a number, else exception will print invalid input
             try
             {                
                 int option = int.Parse(input);
@@ -68,6 +72,7 @@ namespace GTLSystem.TUI
                 MainMenu();
             }
 
+            // Reprint main menu for continuity, use exit to end process
             MainMenu();
         }
     }
