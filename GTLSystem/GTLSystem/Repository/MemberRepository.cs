@@ -10,9 +10,15 @@ namespace GTLSystem.Repository
 {
     class MemberRepository : IMember
     {
-        public int Delete(Member member)
+        public int Delete(string memberSSN)
         {
-            throw new NotImplementedException();
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            return con.Execute(@"DELETE FROM [dbo].[Member] WHERE SSN = " + memberSSN);
+
         }
 
         public Member GetBySSN(string memberSSN)

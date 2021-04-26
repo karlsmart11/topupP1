@@ -10,9 +10,14 @@ namespace GTLSystem.Repository
 {
     class TitleRepository : ITitle
     {
-        public int Delete(Title title)
+        public int Delete(string titleISBN)
         {
-            throw new NotImplementedException();
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            return con.Execute(@"DELETE FROM [dbo].[Title] WHERE ISBN = " + titleISBN); 
         }
 
         public Title GetByISBN(string titleISBN)

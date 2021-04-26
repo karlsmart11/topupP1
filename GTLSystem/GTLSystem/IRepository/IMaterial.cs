@@ -9,6 +9,6 @@ namespace GTLSystem.IRepository
     {
         void Insert(Material material);
         int Update(Material material);
-        int Delete(Material material);
+        int Delete(string materialId);
     }
 }

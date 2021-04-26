@@ -10,9 +10,14 @@ namespace GTLSystem.Repository
 {
     class MaterialRepository : IMaterial
     {
-        public int Delete(Material material)
+        public int Delete(string materialId)
         {
-            throw new NotImplementedException();
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            return con.Execute(@"DELETE FROM [dbo].[Material] WHERE Id = " + materialId);
         }
 
         public void Insert(Material material)

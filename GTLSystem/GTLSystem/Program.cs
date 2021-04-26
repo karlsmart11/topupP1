@@ -13,7 +13,9 @@ namespace GTLSystem
         {
             //Tui.Start();
 
-            //TitleRepository titleRepository = new TitleRepository();
+            TitleRepository titleRepository = new TitleRepository();
+
+            titleRepository.Delete("1234");
 
             //Title title = new Title
             //{
@@ -29,11 +31,11 @@ namespace GTLSystem
 
             //titleRepository.Insert(title);
 
-            MaterialRepository materialRep = new MaterialRepository();
+            //MaterialRepository materialRep = new MaterialRepository();
 
-            Material material = new Material { Type = "Book", ISBN = "1234" };
+            //Material material = new Material { Type = "Book", ISBN = "1234" };
 
-            materialRep.Insert(material);
+            //materialRep.Insert(material);
         }
     }
 }

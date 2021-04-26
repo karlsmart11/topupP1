@@ -9,7 +9,7 @@ namespace GTLSystem.IRepository
     {
         void Insert(Member member);
         int Update(Member member);
-        int Delete(Member member);
+        int Delete(string memberSSN);
         Member GetBySSN(string SSN);
     }
 }

@@ -11,9 +11,14 @@ namespace GTLSystem.Repository
     class LoanRepository : ILoan
     {
 
-        public int Delete(Loan loan)
+        public int Delete(string loanID)
         {
-            throw new NotImplementedException();
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            return con.Execute(@"DELETE FROM [dbo].[Loan] WHERE Id = " + loanID);
         }
 
         public void Insert(Loan loan)
