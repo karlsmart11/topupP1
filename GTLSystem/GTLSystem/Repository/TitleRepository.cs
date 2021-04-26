@@ -15,6 +15,29 @@ namespace GTLSystem.Repository
             throw new NotImplementedException();
         }
 
+        public Title GetByISBN(string titleISBN)
+        {
+            Title result;
+
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            string query = @"SELECT * FROM [dbo].[Title] where ISBN = " + titleISBN;
+
+            try
+            {
+                result = con.QueryFirst<Title>(query);
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         public void Insert(Title title)
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";

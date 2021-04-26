@@ -18,6 +18,7 @@ namespace GTLSystem.Repository
         public Member GetBySSN(string memberSSN)
         {
             Member result;
+
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
