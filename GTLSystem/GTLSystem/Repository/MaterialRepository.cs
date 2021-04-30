@@ -3,6 +3,7 @@ using GTLSystem.IRepository;
 using GTLSystem.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -20,14 +21,14 @@ namespace GTLSystem.Repository
             return con.Execute(@"DELETE FROM [dbo].[Material] WHERE Id = " + materialId);
         }
 
-        public void GetAvailableByISBN(string titleISBN, bool available)
+        public IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available)
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
             con.Open();
 
-            var materials = con.Query<Material>("GetAvailableMaterial", new { ISBN = titleISBN, Available = available }, commandType: System.Data.CommandType.StoredProcedure);
+            return con.Query<Material>("GetAvailableMaterial", new { ISBN = titleISBN, Available = available }, commandType: CommandType.StoredProcedure);
         }
 
         public void Insert(Material material)

@@ -25,9 +25,22 @@ namespace GTLSystem.Controller
             return result;
         }
 
-        internal bool checkISBN(string input)
+        public bool ReserveMaterial(Material material)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            material.Available = false;
+
+            try
+            {
+                materialRepository.Update(material);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

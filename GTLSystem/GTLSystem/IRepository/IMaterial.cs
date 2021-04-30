@@ -10,6 +10,6 @@ namespace GTLSystem.IRepository
         void Insert(Material material);
         int Update(Material material);
         int Delete(string materialId);
-        void GetAvailableByISBN(string titleISBN, bool available);
+        IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available);
     }
 }

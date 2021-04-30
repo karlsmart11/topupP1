@@ -10,6 +10,7 @@ namespace GTLSystem.TUI
         static MemberController memberController = new MemberController();
         static LoanController loanController = new LoanController();
         static MaterialController materialController = new MaterialController();
+        static TitleController titleController = new TitleController();
 
         public static void Start()
         {
@@ -29,7 +30,7 @@ namespace GTLSystem.TUI
             Console.WriteLine();
             Console.WriteLine("Please enter up to 5 titles by ISBN or finish by typing 'done'");
             string input;
-            var materials = new List<string>();
+            var isbns = new List<string>();
 
             for (int i = 0; i < 5; i++)
             {
@@ -39,19 +40,21 @@ namespace GTLSystem.TUI
                 {
                     i = 5;
                 }
-                else if (materialController.checkISBN(input))
+                else if (!titleController.checkISBN(input))
                 {
+                    Console.WriteLine(input);
+                    Console.WriteLine(titleController.checkISBN(input));
                     i--;
-                    Console.WriteLine("Material not found");
+                    Console.WriteLine("ISBN not found");
                 }
                 else
                 {
-                    materials.Add(input);
+                    isbns.Add(input);
                 }
             }
 
             // Check if loan has been registered
-            if (loanController.RegisterLoan(SSN))
+            if (loanController.RegisterLoan(SSN, isbns))
             {
                 Console.WriteLine("Loan registered successfully");
             } else

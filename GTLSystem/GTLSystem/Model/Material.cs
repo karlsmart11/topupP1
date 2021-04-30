@@ -8,7 +8,7 @@ namespace GTLSystem.Model
     {
         public int MaterialId { get; set; }
         public String Type { get; set; }
-
         public String ISBN { get; set; }
+        public bool Available { get; set; }
     }
 }

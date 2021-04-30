@@ -24,5 +24,19 @@ namespace GTLSystem.Controller
 
             return result;
         }
+
+        internal bool checkISBN(string input)
+        {
+            bool res = false;
+
+            var title = titleRepository.GetByISBN(input);
+
+            if (title != null)
+            {
+                res = true;
+            }
+
+            return res;
+        }
     }
 }

@@ -29,14 +29,15 @@ namespace GTLSystem.Repository
             using var con = new SqlConnection(cs);
             con.Open();
 
-            string query = @"SELECT * FROM [dbo].[Title] where ISBN = " + titleISBN;
+            string query = @"SELECT * FROM [dbo].[Title] WHERE ISBN = '" + titleISBN + "'";
 
             try
             {
                 result = con.QueryFirst<Title>(query);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                //Console.WriteLine(e);
                 result = null;
             }
 
