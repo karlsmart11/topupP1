@@ -40,17 +40,31 @@ namespace GTLSystem.Repository
 
             string insertQuery = @"INSERT INTO Material 
             (Type,
-            ISBN) 
+            ISBN, 
+            Available) 
             VALUES 
             (@Type,
-            @ISBN)";
+            @ISBN,
+            @Available)";
 
             con.Execute(insertQuery, material);
         }
 
         public int Update(Material material)
         {
-            throw new NotImplementedException();
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            string updateQuery = @"UPDATE Material
+            Set
+            Type = @Type,
+            ISBN = @ISBN,
+            Available = @Available
+            WHERE Id = " + material.MaterialId;
+
+            return con.Execute(updateQuery);
         }
     }
 }
