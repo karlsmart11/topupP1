@@ -10,5 +10,6 @@ namespace GTLSystem.IRepository
         void Insert(Loan loan);
         int Update(Loan loan);
         int Delete(string loanId);
+        IEnumerable<Loan> getByMemberSSN(string SSN);
     }
 }

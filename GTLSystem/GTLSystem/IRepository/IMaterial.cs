@@ -8,7 +8,7 @@ namespace GTLSystem.IRepository
     interface IMaterial
     {
         void Insert(Material material);
-        int Update(Material material);
+        bool Update(Material material);
         int Delete(string materialId);
         IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available);
     }
