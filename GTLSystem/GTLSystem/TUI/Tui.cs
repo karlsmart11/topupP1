@@ -39,7 +39,7 @@ namespace GTLSystem.TUI
                 {
                     i = 5;
                 }
-                else if (materialController.checkISBN(input))
+                else if (!materialController.checkISBN(input))
                 {
                     i--;
                     Console.WriteLine("Material not found");

@@ -4,11 +4,9 @@ using System.Text;
 
 namespace GTLSystem.Model
 {
-    class Material
+    interface MaterialLoan
     {
         public int MaterialId { get; set; }
-        public String Type { get; set; }
-        public String ISBN { get; set; }
-        public bool Available { get; set; }
+        public int LoanId { get; set; }
     }
 }
