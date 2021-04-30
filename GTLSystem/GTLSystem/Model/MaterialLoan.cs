@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GTLSystem.Model
 {
-    interface MaterialLoan
+    class MaterialLoan
     {
         public int MaterialId { get; set; }
         public int LoanId { get; set; }

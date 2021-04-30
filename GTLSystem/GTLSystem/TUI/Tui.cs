@@ -52,12 +52,18 @@ namespace GTLSystem.TUI
                     isbns.Add(input);
                 }
             }
+            var res = loanController.RegisterLoan(SSN, isbns);
 
             // Check if loan has been registered
-            if (loanController.RegisterLoan(SSN, isbns))
+            if (res == 1)
             {
                 Console.WriteLine("Loan registered successfully");
-            } else
+            }
+            if (res == 0)
+            {
+                Console.WriteLine("All items are reserved");
+            }
+            if (res == -1)
             {
                 Console.WriteLine("Failed to register Loan");
             }

@@ -10,7 +10,7 @@ namespace GTLSystem.Repository
 {
     class MaterialLoanRepository : IMaterialLoan
     {
-        public void Insert(IMaterialLoan materialLoan)
+        public void Insert(MaterialLoan materialLoan)
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 

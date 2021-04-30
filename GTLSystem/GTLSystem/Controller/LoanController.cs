@@ -14,10 +14,11 @@ namespace GTLSystem.Controller
         TitleRepository titleRepository = new TitleRepository();
         MaterialRepository materialRepository = new MaterialRepository();
         MaterialController materialController = new MaterialController();
+        MaterialLoanController materialLoanController = new MaterialLoanController();
 
-        public bool RegisterLoan(String ssn, List<string> isbns)
+        public int RegisterLoan(String ssn, List<string> isbns)
         {
-            bool result = false;
+            int result;
             Member member = memberRepository.GetBySSN(ssn);
             List<Material> materials = new List<Material>();
             List<string> unavailable = new List<string>();
@@ -37,11 +38,9 @@ namespace GTLSystem.Controller
                 }                
             }
 
-
-
-            foreach (var item in materials)
+            if (unavailable.Count == isbns.Count)
             {
-                Console.WriteLine(item.MaterialId);
+                result = 0;
             }
 
             if (member != null)
@@ -53,10 +52,37 @@ namespace GTLSystem.Controller
                 };
 
                 loanRepository.Insert(loan);
-                result = true;
+                loan = loanRepository.
+
+
+                //materialLoanController.CreateMaterialLoan();
+
+                try
+                {
+                    loanRepository.Insert(loan);
+                }
+                catch (Exception)
+                {
+                    result = -1;
+                }
+                
+                result = 1;
+            }
+            else
+            {
+                result = -1;
             }
 
             return result;
+        }
+
+        public bool GetLatestBySSN(string ssn)
+        {
+            bool result;
+
+            var loans = loanRepository.getByMemberSSN(ssn);
+
+            
         }
     }
 }

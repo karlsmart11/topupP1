@@ -6,8 +6,8 @@ namespace GTLSystem.Model
 {
     class Loan
     {
+        public int LoanId { get; set; }
         public DateTime StartDate { get; set; }
         public string MemberSSN { get; set; }
-        public List<Material> materials;
     }
 }

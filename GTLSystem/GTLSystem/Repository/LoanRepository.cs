@@ -30,8 +30,8 @@ namespace GTLSystem.Repository
 
 
             string insertQuery = @"INSERT INTO Loan
-           (StartDate
-           ,MemberSSN)
+           (StartDate,
+            MemberSSN)
             VALUES 
            (@StartDate,
             @MemberSSN)";

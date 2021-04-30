@@ -35,7 +35,7 @@ namespace GTLSystem.Repository
             {
                 result = con.QueryFirst<Title>(query);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //Console.WriteLine(e);
                 result = null;
