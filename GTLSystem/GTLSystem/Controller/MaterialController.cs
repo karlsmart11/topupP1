@@ -32,7 +32,7 @@ namespace GTLSystem.Controller
             material.Available = false;
 
             try
-            {
+            {                
                 materialRepository.Update(material);
             }
             catch (Exception)

@@ -50,8 +50,9 @@ namespace GTLSystem.Repository
             con.Execute(insertQuery, material);
         }
 
-        public int Update(Material material)
+        public bool Update(Material material)
         {
+            bool result = true;
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
@@ -62,9 +63,19 @@ namespace GTLSystem.Repository
             Type = @Type,
             ISBN = @ISBN,
             Available = @Available
-            WHERE Id = " + material.MaterialId;
+            WHERE MaterialId = " + material.MaterialId;
 
-            return con.Execute(updateQuery);
+            try
+            {
+                con.Execute(updateQuery, material);
+            }
+            catch (Exception)
+            {
+                result = false;
+                //Console.WriteLine("THIS IS NOT A DRILL");
+                //Console.WriteLine(e);
+            }
+            return result;
         }
     }
 }
