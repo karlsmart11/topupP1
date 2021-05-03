@@ -22,14 +22,14 @@ namespace GTLSystem.Repository
             return con.Execute(@"DELETE FROM [dbo].[Loan] WHERE Id = " + loanID);
         }
 
-        public IEnumerable<Loan> getByMemberSSN(string SSN)
+        public Loan getNewestLoan(string SSN)
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
             con.Open();
 
-            return con.Query<Loan>("SELECT * FROM Loan WHERE MemberSSN = " + SSN);
+            return con.QueryFirst<Loan>("SELECT TOP 1 * FROM Loan ORDER BY Id DESC");
         }
 
         public void Insert(Loan loan)
