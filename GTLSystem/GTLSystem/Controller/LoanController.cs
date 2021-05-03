@@ -60,7 +60,7 @@ namespace GTLSystem.Controller
                     result = -1;
                 }
                 
-                loan = loanRepository.GetNewestLoan(loan.MemberSSN);
+                loan = loanRepository.GetNewestLoan();
 
                 foreach (var material in materials)
                 {
