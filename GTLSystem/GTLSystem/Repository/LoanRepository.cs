@@ -22,14 +22,14 @@ namespace GTLSystem.Repository
             return con.Execute(@"DELETE FROM [dbo].[Loan] WHERE Id = " + loanID);
         }
 
-        public Loan GetNewestLoan(string SSN)
+        public Loan GetNewestLoan()
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
             con.Open();
 
-            return con.QueryFirst<Loan>("SELECT TOP 1 * FROM Loan ORDER BY Id DESC");
+            return con.QueryFirst<Loan>("SELECT TOP 1 * FROM Loan ORDER BY LoanId DESC");
         }
 
         public void Insert(Loan loan)

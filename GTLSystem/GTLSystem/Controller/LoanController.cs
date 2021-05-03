@@ -18,7 +18,7 @@ namespace GTLSystem.Controller
 
         public int RegisterLoan(String ssn, List<string> isbns)
         {
-            int result;
+            int result = 1;
             Member member = memberRepository.GetBySSN(ssn);
             List<Material> materials = new List<Material>();
             List<string> unavailable = new List<string>();
@@ -43,7 +43,7 @@ namespace GTLSystem.Controller
                 result = 0;
             }
 
-            if (member != null)
+            if (member != null && result != 0)
             {
                 Loan loan = new Loan()
                 {
@@ -60,7 +60,7 @@ namespace GTLSystem.Controller
                     result = -1;
                 }
                 
-                loan = loanRepository.GetNewestLoan(loan.MemberSSN);
+                loan = loanRepository.GetNewestLoan();
 
                 foreach (var material in materials)
                 {
