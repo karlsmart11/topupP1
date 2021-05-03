@@ -11,5 +11,6 @@ namespace GTLSystem.IRepository
         int Update(Loan loan);
         int Delete(string loanId);
         Loan GetNewestLoan();
+        int MaterialCountBySSN(string SSN);
     }
 }

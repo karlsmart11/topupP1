@@ -50,6 +50,16 @@ namespace GTLSystem.Repository
             con.Execute(insertQuery, loan);
         }
 
+        public int MaterialCountBySSN(string memberSSN)
+        {
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            return con.QuerySingle<int>("SELECT COUNT(MaterialId) FROM Loan INNER JOIN MaterialLoan ON Loan.LoanId = MaterialLoan.LoanId WHERE Loan.MemberSSN = '" + memberSSN + "'");
+        }
+
         public int Update(Loan loan)
         {
             throw new NotImplementedException();
