@@ -8,10 +8,9 @@ namespace GTLSystem.TUI
 {
     static class Tui
     {
-        static MemberController memberController = new MemberController();
-        static LoanController loanController = new LoanController();
-        static MaterialController materialController = new MaterialController();
-        static TitleController titleController = new TitleController();
+        private static readonly LoanController loanController = new LoanController();
+        private static readonly MaterialController materialController = new MaterialController();
+        private static readonly TitleController titleController = new TitleController();
 
         public static void Start()
         {
@@ -39,6 +38,7 @@ namespace GTLSystem.TUI
 
             for (int i = 0; i < 5 - currNoOfMaterials; i++)
             {
+                Console.Write("item no " + (i+1) + ": ");
                 input = Console.ReadLine();
 
                 if (input.ToLower().Equals("done"))
@@ -73,10 +73,7 @@ namespace GTLSystem.TUI
                 Console.WriteLine("Failed to register Loan");
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
-            Console.Clear();         
+            AnyKey();
         }
 
         private static void GetNumberOfAvailable()
@@ -84,8 +81,8 @@ namespace GTLSystem.TUI
             int noOfMaterials = materialController.GetNumberOfAvailableMaterials();
 
             Console.WriteLine("There are " + noOfMaterials + " materials available in total");
-            Console.ReadKey();
 
+            AnyKey();
         }
 
         private static void GetNumberOfUnavailable()
@@ -93,19 +90,27 @@ namespace GTLSystem.TUI
             int noOfMaterials = materialController.GetNumberOfUnavailableMaterials();
 
             Console.WriteLine("There are " + noOfMaterials + " materials unavailable in total");
-            Console.ReadKey();
+
+            AnyKey();
         }
 
         private static void GetTitleByISBN()
         {
-            Console.WriteLine("Please Enter SSN");
-            var ISBN = Console.ReadLine();
+            Console.Write("Please Enter ISBN: ");
+            string ISBN = Console.ReadLine();
 
             Title title = titleController.GetByISBN(ISBN);
 
-            Console.WriteLine(title.Description);
-            Console.ReadKey();
+            if (title != null)
+            {
+                Console.WriteLine(title.Description);
+            }
+            else
+            {
+                Console.WriteLine("Title not found");
+            }
 
+            AnyKey();
         }
 
         private static void MainMenu()
@@ -156,12 +161,20 @@ namespace GTLSystem.TUI
                 Console.Clear();
                 Console.WriteLine("Invalid Menu Entry");    
                 Console.WriteLine(e); //for debugging
-                Console.ReadLine();
+                Console.ReadKey();
                 MainMenu();
             }
 
             // Reprint main menu for continuity, use exit to end process
             MainMenu();
+        }
+
+        private static void AnyKey()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

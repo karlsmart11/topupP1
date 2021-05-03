@@ -41,7 +41,18 @@ namespace GTLSystem.Controller
 
         public Title GetByISBN(string ISBN)
         {
-            return titleRepository.GetByISBN(ISBN);
+            Title res;
+
+            try
+            {
+                res = titleRepository.GetByISBN(ISBN);
+            }
+            catch (Exception)
+            {
+                res = null;                
+            }
+
+            return res;
         }
     }
 }
