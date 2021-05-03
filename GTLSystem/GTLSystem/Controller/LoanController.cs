@@ -64,14 +64,18 @@ namespace GTLSystem.Controller
 
                 foreach (var material in materials)
                 {
-                    materialLoanController.CreateMaterialLoan(loan, material); 
+                    try
+                    {
+                        materialLoanController.CreateMaterialLoan(loan, material);
+                    }
+                    catch (Exception)
+                    {
+                        result = -1;
+                    }
+                    
                 }
                 
                 result = 1;
-            }
-            else
-            {
-                result = -1;
             }
 
             return result;
