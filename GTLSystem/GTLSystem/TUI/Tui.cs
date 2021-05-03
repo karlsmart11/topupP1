@@ -83,6 +83,7 @@ namespace GTLSystem.TUI
             Console.WriteLine("");
             Console.WriteLine("1: Register Loan");
 
+
             string input = Console.ReadLine().ToLower();
             if(input.Equals("exit"))
             {
