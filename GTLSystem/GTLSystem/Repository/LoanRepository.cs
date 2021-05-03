@@ -22,7 +22,7 @@ namespace GTLSystem.Repository
             return con.Execute(@"DELETE FROM [dbo].[Loan] WHERE Id = " + loanID);
         }
 
-        public Loan getNewestLoan(string SSN)
+        public Loan GetNewestLoan(string SSN)
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 

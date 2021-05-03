@@ -51,11 +51,6 @@ namespace GTLSystem.Controller
                     MemberSSN = member.SSN
                 };
 
-                loanRepository.Insert(loan);
-                loan = loanRepository.getNewestBySSN(loan.MemberSSN);
-
-                //materialLoanController.CreateMaterialLoan();
-
                 try
                 {
                     loanRepository.Insert(loan);
@@ -63,6 +58,13 @@ namespace GTLSystem.Controller
                 catch (Exception)
                 {
                     result = -1;
+                }
+                
+                loan = loanRepository.GetNewestLoan(loan.MemberSSN);
+
+                foreach (var material in materials)
+                {
+                    materialLoanController.CreateMaterialLoan(loan, material); 
                 }
                 
                 result = 1;
