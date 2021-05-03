@@ -11,6 +11,10 @@ namespace GTLSystem
     {
         static void Main(string[] args)
         {
+            MaterialRepository materialRepository = new MaterialRepository();
+
+            Console.WriteLine(materialRepository.GetNumberOfUnavailable());
+
             Tui.Start();
 
             //var titlerepo = new TitleRepository();

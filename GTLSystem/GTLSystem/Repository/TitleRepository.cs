@@ -20,28 +20,15 @@ namespace GTLSystem.Repository
             return con.Execute(@"DELETE FROM [dbo].[Title] WHERE ISBN = " + titleISBN); 
         }
 
+
         public Title GetByISBN(string titleISBN)
         {
-            Title result;
-
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
             con.Open();
 
-            string query = @"SELECT * FROM [dbo].[Title] WHERE ISBN = '" + titleISBN + "'";
-
-            try
-            {
-                result = con.QueryFirst<Title>(query);
-            }
-            catch (Exception)
-            {
-                //Console.WriteLine(e);
-                result = null;
-            }
-
-            return result;
+            return con.QueryFirst<Title>("SELECT * FROM Title where ISBN = '" + titleISBN + "'");
         }
 
         public void Insert(Title title)

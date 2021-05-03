@@ -25,7 +25,7 @@ namespace GTLSystem.Controller
             return result;
         }
 
-        internal bool checkISBN(string input)
+        public bool checkISBN(string input)
         {
             bool res = false;
 
@@ -37,6 +37,11 @@ namespace GTLSystem.Controller
             }
 
             return res;
+        }
+
+        public Title GetByISBN(string ISBN)
+        {
+            return titleRepository.GetByISBN(ISBN);
         }
     }
 }

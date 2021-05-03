@@ -10,5 +10,6 @@ namespace GTLSystem.IRepository
         void Insert(Title title);
         int Update(Title title);
         int Delete(string titleISBN);
+        Title GetByISBN(string ISBN);
     }
 }

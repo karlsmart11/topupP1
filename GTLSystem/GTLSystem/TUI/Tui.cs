@@ -1,4 +1,5 @@
 ﻿using GTLSystem.Controller;
+using GTLSystem.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -74,6 +75,35 @@ namespace GTLSystem.TUI
             Console.Clear();         
         }
 
+        private static void GetNumberOfAvailable()
+        {
+            int noOfMaterials = materialController.GetNumberOfAvailableMaterials();
+
+            Console.WriteLine("There are " + noOfMaterials + " materials available in total");
+            Console.ReadKey();
+
+        }
+
+        private static void GetNumberOfUnavailable()
+        {
+            int noOfMaterials = materialController.GetNumberOfUnavailableMaterials();
+
+            Console.WriteLine("There are " + noOfMaterials + " materials unavailable in total");
+            Console.ReadKey();
+        }
+
+        private static void GetTitleByISBN()
+        {
+            Console.WriteLine("Please Enter SSN");
+            var ISBN = Console.ReadLine();
+
+            Title title = titleController.GetByISBN(ISBN);
+
+            Console.WriteLine(title.Description);
+            Console.ReadKey();
+
+        }
+
         private static void MainMenu()
         {
             Console.Clear();
@@ -82,6 +112,9 @@ namespace GTLSystem.TUI
             Console.WriteLine("                Main menu");
             Console.WriteLine("");
             Console.WriteLine("1: Register Loan");
+            Console.WriteLine("2: Number of available materials");
+            Console.WriteLine("3: Number of unavailable materials");
+            Console.WriteLine("4: Get information on a title");
 
 
             string input = Console.ReadLine().ToLower();
@@ -99,6 +132,17 @@ namespace GTLSystem.TUI
                 {
                     case 1:
                         RegisterLoan();
+                        break;
+
+                    case 2:
+                        GetNumberOfAvailable();
+                        break;
+
+                    case 3:
+                        GetNumberOfUnavailable();
+                        break;
+                    case 4:
+                        GetTitleByISBN();
                         break;
                 }
 
