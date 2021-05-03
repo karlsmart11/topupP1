@@ -74,8 +74,6 @@ namespace GTLSystem.Controller
                     }
                     
                 }
-                
-                result = 1;
             }
 
             return result;
