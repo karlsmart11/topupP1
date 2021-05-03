@@ -52,8 +52,7 @@ namespace GTLSystem.Controller
                 };
 
                 loanRepository.Insert(loan);
-                loan = loanRepository.
-
+                loan = loanRepository.getNewestBySSN(loan.MemberSSN);
 
                 //materialLoanController.CreateMaterialLoan();
 
@@ -74,15 +73,6 @@ namespace GTLSystem.Controller
             }
 
             return result;
-        }
-
-        public bool GetLatestBySSN(string ssn)
-        {
-            bool result;
-
-            var loans = loanRepository.getByMemberSSN(ssn);
-
-            
         }
     }
 }
