@@ -32,14 +32,14 @@ namespace GTLSystem.TUI
 
 
             Console.WriteLine();
-            Console.WriteLine("Please enter up to 5 titles by ISBN or finish by typing 'done'");
+            Console.WriteLine("Please enter up to " + (5-currNoOfMaterials) + " titles by ISBN or finish by typing 'done'");
             string input;
             var isbns = new List<string>();
 
             for (int i = 0; i < 5 - currNoOfMaterials; i++)
             {
                 Console.Write("item no " + (i+1) + ": ");
-                input = Console.ReadLine();
+                input = (string) Console.ReadLine();
 
                 if (input.ToLower().Equals("done"))
                 {
@@ -47,10 +47,9 @@ namespace GTLSystem.TUI
                 }
                 else if (!titleController.checkISBN(input))
                 {
-                    Console.WriteLine(input);
-                    Console.WriteLine(titleController.checkISBN(input));
-                    i--;
                     Console.WriteLine("ISBN not found");
+                    Console.WriteLine();
+                    i--;
                 }
                 else
                 {
@@ -80,7 +79,14 @@ namespace GTLSystem.TUI
         {
             int noOfMaterials = materialController.GetNumberOfAvailableMaterials();
 
-            Console.WriteLine("There are " + noOfMaterials + " materials available in total");
+            if (noOfMaterials >= 0)
+            {
+                Console.WriteLine("There are " + noOfMaterials + " materials available in total");
+            }
+            else
+            {
+                Console.WriteLine("Error when reading number of available materials");
+            }
 
             AnyKey();
         }
@@ -89,7 +95,14 @@ namespace GTLSystem.TUI
         {
             int noOfMaterials = materialController.GetNumberOfUnavailableMaterials();
 
-            Console.WriteLine("There are " + noOfMaterials + " materials unavailable in total");
+            if (noOfMaterials >= 0)
+            {
+                Console.WriteLine("There are " + noOfMaterials + " materials unavailable in total");
+            }
+            else
+            {
+                Console.WriteLine("Error when reading number of unavailable materials");
+            }
 
             AnyKey();
         }
@@ -124,9 +137,12 @@ namespace GTLSystem.TUI
             Console.WriteLine("2: Number of available materials");
             Console.WriteLine("3: Number of unavailable materials");
             Console.WriteLine("4: Get information on a title");
+            Console.WriteLine();
 
+            Console.Write("Select entry: ");
 
             string input = Console.ReadLine().ToLower();
+
             if(input.Equals("exit"))
             {
                 return;
@@ -161,7 +177,7 @@ namespace GTLSystem.TUI
                 Console.Clear();
                 Console.WriteLine("Invalid Menu Entry");    
                 Console.WriteLine(e); //for debugging
-                Console.ReadKey();
+                AnyKey();
                 MainMenu();
             }
 
