@@ -42,5 +42,15 @@ namespace GTLSystem.Controller
 
             return result;
         }
+
+        public int GetNumberOfAvailableMaterials()
+        {
+            return materialRepository.GetNumberOfAvailable();
+        }
+
+        public int GetNumberOfUnavailableMaterials()
+        {
+            return materialRepository.GetNumberOfUnavailable();
+        }
     }
 }

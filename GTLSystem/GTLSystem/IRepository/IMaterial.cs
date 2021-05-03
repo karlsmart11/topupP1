@@ -11,5 +11,8 @@ namespace GTLSystem.IRepository
         bool Update(Material material);
         int Delete(string materialId);
         IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available);
+        int GetNumberOfAvailable();
+        int GetNumberOfUnavailable();
+
     }
 }

@@ -71,8 +71,7 @@ namespace GTLSystem.Controller
                     catch (Exception)
                     {
                         result = -1;
-                    }
-                    
+                    }                    
                 }
             }
 
