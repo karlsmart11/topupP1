@@ -116,6 +116,7 @@ namespace GTLSystem.TUI
             Console.WriteLine("3: Number of unavailable materials");
             Console.WriteLine("4: Get information on a title");
 
+
             string input = Console.ReadLine().ToLower();
             if(input.Equals("exit"))
             {
