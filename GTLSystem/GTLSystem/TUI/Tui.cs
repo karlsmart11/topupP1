@@ -20,6 +20,7 @@ namespace GTLSystem.TUI
 
         private static void RegisterLoan()
         {
+
             Console.Clear();
             Console.WriteLine("Georgia Tech Library Reservation system Inc.");
             Console.WriteLine("--------------------------------------------");
@@ -28,18 +29,21 @@ namespace GTLSystem.TUI
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
 
+            int currNoOfMaterials = loanController.GetCurrentNoOfMaterialsBySSN(SSN);
+
+
             Console.WriteLine();
             Console.WriteLine("Please enter up to 5 titles by ISBN or finish by typing 'done'");
             string input;
             var isbns = new List<string>();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 5 - currNoOfMaterials; i++)
             {
                 input = Console.ReadLine();
 
                 if (input.ToLower().Equals("done"))
                 {
-                    i = 5;
+                    i = 5 - currNoOfMaterials;
                 }
                 else if (!titleController.checkISBN(input))
                 {

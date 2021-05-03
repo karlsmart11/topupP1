@@ -77,5 +77,10 @@ namespace GTLSystem.Controller
 
             return result;
         }
+
+        public int GetCurrentNoOfMaterialsBySSN(string SSN)
+        {
+            return loanRepository.MaterialCountBySSN(SSN);
+        }
     }
 }
