@@ -11,5 +11,6 @@ namespace GTLSystem.IRepository
         int Update(Member member);
         int Delete(string memberSSN);
         Member GetBySSN(string SSN);
+        IEnumerable<Member> GetAllMembers();
     }
 }

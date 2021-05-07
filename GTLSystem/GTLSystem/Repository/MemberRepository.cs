@@ -21,6 +21,27 @@ namespace GTLSystem.Repository
 
         }
 
+        public IEnumerable<Member> GetAllMembers()
+        {
+            IEnumerable<Member> result;
+
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            try
+            {
+                result = con.Query<Member>("SELECT * FROM Member");
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         public Member GetBySSN(string memberSSN)
         {
             Member result;
