@@ -26,17 +26,5 @@ namespace GTLSystem.Repository
 
             con.Execute(insertQuery, materialLoan);
         }
-
-        public int AmountBySSN()
-        {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
-
-            var test = con.QueryFirst<Loan>("SELECT * FROM MaterialLoan WHERE SSN = %ssn");
-
-            return;
-        }
     }
 }
