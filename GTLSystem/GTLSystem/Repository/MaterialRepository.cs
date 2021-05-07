@@ -31,6 +31,27 @@ namespace GTLSystem.Repository
             return con.Query<Material>("GetAvailableMaterial", new { ISBN = titleISBN, Available = available }, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<Material> GetAvailableMaterials()
+        {
+            IEnumerable<Material> result;
+
+            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            try
+            {
+                result = con.Query<Material>("SELECT * FROM Material WHERE Available = 1");
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         public int GetNumberOfAvailable()
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";

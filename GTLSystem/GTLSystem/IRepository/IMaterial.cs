@@ -13,6 +13,7 @@ namespace GTLSystem.IRepository
         IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available);
         int GetNumberOfAvailable();
         int GetNumberOfUnavailable();
+        IEnumerable<Material> GetAvailableMaterials();
 
     }
 }
