@@ -16,6 +16,98 @@ namespace GTLSystem.Controller
         MaterialController materialController = new MaterialController();
         MaterialLoanController materialLoanController = new MaterialLoanController();
 
+        public bool GenerateLoans(int amount)
+        {
+            bool result = true;
+            List<Member> members = new List<Member>();
+            List<Material> allMaterials = new List<Material>();
+            Member member;
+            Random random = new Random();
+
+            foreach (var item in memberRepository.GetAllMembers())
+            {
+                members.Add(item);
+            }
+            foreach (var item in materialRepository.GetAvailableMaterials())
+            {
+                allMaterials.Add(item);
+            }
+
+            if (allMaterials.Count == 0) result = false;
+            
+            for (int i = 0; i < amount && result ; i++)
+            {
+                member = members[random.Next(0, members.Count)];
+                var materials = new List<Material>();
+                int max;
+
+                if (allMaterials.Count() > 5)
+                {
+                    max = 5;
+                }
+                else
+                {
+                    max = allMaterials.Count();
+                }
+
+                int count = random.Next(1, max);
+
+                Console.WriteLine("Creating Loan with " + count + " materials");
+
+                for (int j = 0; j < count ; j++)
+                {
+                    var index = random.Next(0, allMaterials.Count());
+                    materials.Add(allMaterials[index]);
+                    materialController.ReserveMaterial(allMaterials[index]);
+                    allMaterials.RemoveAt(index);
+
+                    Console.WriteLine("Material " + (j+1) + " added to loan");
+                }
+
+                if (member != null && result)
+                {
+                    Loan loan = new Loan()
+                    {
+                        StartDate = DateTime.Now,
+                        MemberSSN = member.SSN
+                    };
+
+                    try
+                    {
+                        loanRepository.Insert(loan);
+                        Console.WriteLine("Loan registered");
+                    }
+                    catch (Exception)
+                    {
+                        result = false;
+                    }
+
+                    loan = loanRepository.GetNewestLoan();
+
+                    Console.WriteLine("Registering " + materials.Count() + " MaterialLoans");
+
+                    foreach (var material in materials)
+                    {
+                        try
+                        {
+                            materialLoanController.CreateMaterialLoan(loan, material);
+                        }
+                        catch (Exception)
+                        {
+                            result = false;
+                        }
+                    }
+
+                    Console.WriteLine("------------------------");
+                }
+                if (members.Count == 0 || allMaterials.Count == 0) result = false;                
+            }
+
+            Console.WriteLine("remaining free materials: " + allMaterials.Count());
+
+            return result;
+        }
+
         public int RegisterLoan(String ssn, List<string> isbns)
         {
             int result = 1;

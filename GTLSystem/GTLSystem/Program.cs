@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using GTLSystem.Controller;
 using GTLSystem.Model;
 using GTLSystem.Repository;
 using GTLSystem.TUI;
@@ -12,6 +13,7 @@ namespace GTLSystem
         static void Main(string[] args)
         {
             Tui.Start();
+            //Tui.GenerateLoans(100);
 
             //var titlerepo = new TitleRepository();
 
