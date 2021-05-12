@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GTLSystem.Model
 {
-    class Member
+    public class Member
     {
         public String SSN { get; set; }
         public String Campus { get; set; }

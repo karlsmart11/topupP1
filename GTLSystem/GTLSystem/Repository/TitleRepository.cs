@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GTLSystem.Repository
 {
-    class TitleRepository : ITitle
+    public class TitleRepository : ITitle
     {
         public int Delete(string titleISBN)
         {
@@ -23,12 +23,22 @@ namespace GTLSystem.Repository
 
         public Title GetByISBN(string titleISBN)
         {
+            Title result;
+
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
 
             using var con = new SqlConnection(cs);
             con.Open();
 
-            return con.QueryFirst<Title>("SELECT * FROM Title where ISBN = '" + titleISBN + "'");
+            try
+            {
+                result = con.QueryFirst<Title>("SELECT * FROM Title where ISBN = '" + titleISBN + "'");
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+            return result;
         }
 
         public void Insert(Title title)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GTLSystem.Model
 {
-    class Title
+    public class Title
     {
         public String ISBN { get; set; }
         public bool Requested { get; set; }

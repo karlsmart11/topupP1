@@ -13,7 +13,13 @@ namespace GTLSystem
         static void Main(string[] args)
         {
             Tui.Start();
-            //Tui.GenerateLoans(100);
+            //Tui.GenerateLoans(200);
+
+            //MemberRepository memberRepository = new MemberRepository();
+
+            //Member member = memberRepository.GetBySSN("101-81-1695");
+
+            //Console.WriteLine(member.SSN);
 
             //var titlerepo = new TitleRepository();
 
