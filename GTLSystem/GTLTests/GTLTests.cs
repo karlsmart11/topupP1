@@ -65,8 +65,7 @@ namespace GTLTests
             using (var mock = AutoMock.GetLoose())
             {
                 mock.Mock<IMember>()
-                    .Setup(x => x.GetAllMembers())
-                    .Returns(GetSampleMembers());
+                    .Setup(x => x.GetAllMembers()).Returns(GetSampleMembers());
 
                 var ctrl = mock.Create<MemberController>();
 
@@ -74,7 +73,7 @@ namespace GTLTests
 
                 mock.Mock<IMember>()
                     .Verify(x => x.GetAllMembers(), Times.Exactly(1));
-            }           
+            }
         }
 
         private IEnumerable<Member> GetSampleMembers()

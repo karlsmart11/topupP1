@@ -9,7 +9,12 @@ namespace GTLSystem.Controller
 {
     public class MemberController
     {
-        private IMember memberRepository = new MemberRepository();
+        private IMember memberRepository;
+
+        public MemberController(IMember memberRepo)
+        {
+            memberRepository = memberRepo;
+        }
 
         public bool CheckSSN(string SSN)
         {
