@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GTLSystem.Repository;
 using GTLSystem.IRepository;
+using GTLSystem.Controller;
 using GTLSystem.Model;
 using FluentAssertions;
 using Autofac.Extras.Moq;
@@ -59,13 +60,53 @@ namespace GTLTests
         }
 
         [TestMethod]
-        public void Test_Insert()
+        public void Test_GetAllMembers()
         {
-            var titleRepoMock = new Mock<IMember>();
+            using (var mock = AutoMock.GetLoose())
+            {
+                mock.Mock<IMember>()
+                    .Setup(x => x.GetAllMembers())
+                    .Returns(GetSampleMembers());
 
-            titleRepoMock.Setup(x => x.GetAllMembers()).Returns
+                var ctrl = mock.Create<MemberController>();
+
+                ctrl.GetAllMembers();
+
+                mock.Mock<IMember>()
+                    .Verify(x => x.GetAllMembers(), Times.Exactly(1));
+            }           
         }
 
-        private
+        private IEnumerable<Member> GetSampleMembers()
+        {
+            List<Member> output = new List<Member>
+            {
+                new Member
+                {
+                    SSN = "test",
+                    Campus = "testcampus",
+                    Address = "testaddress",
+                    PhoneNumber = "testphone",
+                    CardExpDate = DateTime.MinValue
+                },
+                new Member
+                {
+                    SSN = "test2",
+                    Campus = "testcampus2",
+                    Address = "testaddress2",
+                    PhoneNumber = "testphone2",
+                    CardExpDate = DateTime.MinValue
+                },
+                new Member
+                {
+                    SSN = "test3",
+                    Campus = "testcampus3",
+                    Address = "testaddress3",
+                    PhoneNumber = "testphone3",
+                    CardExpDate = DateTime.MinValue
+                }
+            };
+            return output;
+        }
     }
 }
