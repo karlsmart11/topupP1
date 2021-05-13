@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GTLSystem.Model
 {
-    class Material
+    public class Material
     {
         public int MaterialId { get; set; }
         public String Type { get; set; }

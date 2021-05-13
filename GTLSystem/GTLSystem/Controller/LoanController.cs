@@ -16,6 +16,7 @@ namespace GTLSystem.Controller
         MaterialController materialController = new MaterialController();
         MaterialLoanController materialLoanController = new MaterialLoanController();
 
+        // Generate random loans as test data
         public bool GenerateLoans(int amount)
         {
             bool result = true;

@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GTLSystem.Repository;
 using GTLSystem.Model;
 using FluentAssertions;
+using Autofac.Extras.Moq;
 
 namespace GTLTests
 {
@@ -39,6 +40,8 @@ namespace GTLTests
         [TestMethod]
         public void Test_Title_Get_By_Incorrect_ISBN()
         {
+            using (var mock = AutoMock.GetLoose());
+
             //Arrange
             string wrongInput = "XXX";
             TitleRepository titleRepository = new TitleRepository();

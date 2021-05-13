@@ -9,7 +9,7 @@ using System.Text;
 
 namespace GTLSystem.Repository
 {
-    class MaterialRepository : IMaterial
+    public class MaterialRepository : IMaterial
     {
         public int Delete(string materialId)
         {
