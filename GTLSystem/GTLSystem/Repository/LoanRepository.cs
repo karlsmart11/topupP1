@@ -9,7 +9,7 @@ using System.Text;
 
 namespace GTLSystem.Repository
 {
-    class LoanRepository : ILoan
+    public class LoanRepository : ILoan
     {
 
         public int Delete(string loanID)

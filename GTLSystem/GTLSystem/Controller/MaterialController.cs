@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GTLSystem.Controller
 {
-    class MaterialController
+    public class MaterialController
     {
         MaterialRepository materialRepository = new MaterialRepository();
 

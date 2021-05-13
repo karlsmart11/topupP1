@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GTLSystem.TUI
 {
-    static class Tui
+    public static class Tui
     {
         private static readonly LoanController loanController = new LoanController();
         private static readonly MaterialController materialController = new MaterialController();

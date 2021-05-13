@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GTLSystem.Controller
 {
-    class MemberController
+    public class MemberController
     {
         private MemberRepository memberRepository = new MemberRepository();
 

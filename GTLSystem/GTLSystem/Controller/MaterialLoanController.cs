@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GTLSystem.Controller
 {
-    class MaterialLoanController
+    public class MaterialLoanController
     {
         MaterialLoanRepository materialLoanRepository = new MaterialLoanRepository();
         public bool CreateMaterialLoan(Loan loan, Material material)

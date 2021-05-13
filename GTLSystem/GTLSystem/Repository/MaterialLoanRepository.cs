@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GTLSystem.Repository
 {
-    class MaterialLoanRepository : IMaterialLoan
+    public class MaterialLoanRepository : IMaterialLoan
     {
         public void Insert(MaterialLoan materialLoan)
         {
