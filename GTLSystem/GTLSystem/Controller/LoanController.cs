@@ -7,11 +7,13 @@ using System.Text;
 
 namespace GTLSystem.Controller
 {
-    class LoanController        
+    public class LoanController        
     {
+        private static DbConnection connection;
+
         MemberRepository memberRepository = new MemberRepository();
         LoanRepository loanRepository = new LoanRepository();
-        TitleRepository titleRepository = new TitleRepository();
+        TitleRepository titleRepository = new TitleRepository(connection);
         MaterialRepository materialRepository = new MaterialRepository();
         MaterialController materialController = new MaterialController();
         MaterialLoanController materialLoanController = new MaterialLoanController();

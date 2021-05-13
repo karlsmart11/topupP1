@@ -1,4 +1,5 @@
-﻿using GTLSystem.Model;
+﻿using GTLSystem.IRepository;
+using GTLSystem.Model;
 using GTLSystem.Repository;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.Text;
 
 namespace GTLSystem.Controller
 {
-    class MemberController
+    public class MemberController
     {
-        private MemberRepository memberRepository = new MemberRepository();
+        private IMember memberRepository = new MemberRepository();
 
         public bool CheckSSN(string SSN)
         {
@@ -19,6 +20,17 @@ namespace GTLSystem.Controller
                 status = false;
             }
 
+            return status;
+        }
+
+        public bool GetAllMembers()
+        {
+            bool status = true;
+
+            if (memberRepository.GetAllMembers() == null)
+            {
+                status = false;
+            }
             return status;
         }
     }

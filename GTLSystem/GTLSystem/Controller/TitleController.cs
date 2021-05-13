@@ -6,9 +6,11 @@ using System.Text;
 
 namespace GTLSystem.Controller
 {
-    class TitleController
+    public class TitleController
     {
-        TitleRepository titleRepository = new TitleRepository();
+        static DbConnection connection = new DbConnection();
+
+        TitleRepository titleRepository = new TitleRepository(connection);
 
         public bool RegisterTitle(Title title)
         {

@@ -10,6 +10,15 @@ namespace GTLSystem.Repository
 {
     public class TitleRepository : ITitle
     {
+        private DbConnection connection;
+
+        public TitleRepository() { }
+
+        public TitleRepository(DbConnection connection)
+        {
+            this.connection = connection;
+        }
+
         public int Delete(string titleISBN)
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
@@ -25,10 +34,7 @@ namespace GTLSystem.Repository
         {
             Title result;
 
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             try
             {
