@@ -10,6 +10,7 @@ namespace GTLSystem.Repository
 {
     public class MemberRepository : IMember
     {
+
         public int Delete(string memberSSN)
         {
             var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
