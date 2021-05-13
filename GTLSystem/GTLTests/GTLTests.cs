@@ -6,6 +6,7 @@ using GTLSystem.Repository;
 using GTLSystem.IRepository;
 using GTLSystem.Model;
 using FluentAssertions;
+using Autofac.Extras.Moq;
 using Moq;
 
 namespace GTLTests
@@ -42,6 +43,8 @@ namespace GTLTests
         [TestMethod]
         public void Test_Title_Get_By_Incorrect_ISBN()
         {
+            using (var mock = AutoMock.GetLoose());
+
             //Arrange
             DbConnection connection = new DbConnection();
             string wrongInput = "XXX";
