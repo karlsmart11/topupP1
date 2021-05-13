@@ -70,6 +70,11 @@ namespace GTLSystem.Repository
             con.Execute(insertQuery, title);
         }
 
+        public object GetByISBN()
+        {
+            throw new NotImplementedException();
+        }
+
         public int Update(Title title)
         {
             throw new NotImplementedException();

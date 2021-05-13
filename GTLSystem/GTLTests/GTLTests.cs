@@ -6,6 +6,7 @@ using GTLSystem.Repository;
 using GTLSystem.Model;
 using FluentAssertions;
 using Autofac.Extras.Moq;
+using GTLSystem.IRepository;
 
 namespace GTLTests
 {
@@ -40,18 +41,48 @@ namespace GTLTests
         [TestMethod]
         public void Test_Title_Get_By_Incorrect_ISBN()
         {
-            using (var mock = AutoMock.GetLoose());
+            using (var mock = AutoMock.GetLoose())
+            {
+                //arrange
+                string wrongInput = "wrongInput";
+                mock.Mock<ITitle>()
+                    .Setup(x => x.GetByISBN(wrongInput))
+                    .Returns(GetSampleNullTitle);
+
+                //Act
+                var res = mock.Create<TitleRepository>().GetByISBN(wrongInput);
+
+                //Assert
+                res.Should().BeNull();
+            }
 
             //Arrange
-            string wrongInput = "XXX";
-            TitleRepository titleRepository = new TitleRepository();
+            //string wrongInput = "XXX";
+            //TitleRepository titleRepository = new TitleRepository();
 
             //Act
-            Title title = titleRepository.GetByISBN(wrongInput);
+            //Title title = titleRepository.GetByISBN(wrongInput);
 
             //Assert
-            title.Should().BeNull();
+            //title.Should().BeNull();
 
+        }
+
+        private Title GetSampleNullTitle()
+        {
+            return null;
+        }
+
+        private Title GetSampleTitle()
+        {
+            return new Title { Author = "testAuthor",
+                               Description = "testDesc",
+                               Available = true,
+                               ISBN = "testISBN",
+                               Loanable = true,
+                               Requested = false,
+                               Subject = "testSubject",
+                               TitleName = "testTitleName"};
         }
     }
 }
