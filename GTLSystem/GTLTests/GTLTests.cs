@@ -61,11 +61,9 @@ namespace GTLTests
             }
 
             //Arrange
-            DbConnection connection = new DbConnection();
-            string wrongInput = "XXX";
-            TitleRepository titleRepository = new TitleRepository(connection);
+            //DbConnection connection = new DbConnection();
+            //TitleRepository titleRepository = new TitleRepository(connection);
             //string wrongInput = "XXX";
-            //TitleRepository titleRepository = new TitleRepository();
 
             //Act
             //Title title = titleRepository.GetByISBN(wrongInput);
@@ -103,7 +101,7 @@ namespace GTLTests
 
                 var ctrl = mock.Create<MemberController>();
 
-                ctrl.GetAllMembers();
+                var test = ctrl.GetAllMembers();
 
                 mock.Mock<IMember>()
                     .Verify(x => x.GetAllMembers(), Times.Exactly(1));
