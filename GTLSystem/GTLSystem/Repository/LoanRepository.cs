@@ -9,7 +9,7 @@ using System.Text;
 
 namespace GTLSystem.Repository
 {
-    public class LoanRepository : ILoan
+    public class LoanRepository : ILoanRepository
     {
         private DbConnection connection;
 

@@ -13,7 +13,7 @@ namespace GTLSystem.Controller
 
         private IMember memberRepository = new MemberRepository(connection);
 
-        public MemberController(IMember memberRepo)
+        public MemberController(IMemberRepository memberRepo)
         {
             memberRepository = memberRepo;
         }

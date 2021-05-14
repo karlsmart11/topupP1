@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GTLSystem.IRepository
 {
-    public interface IMember
+    public interface IMemberRepository
     {
         void Insert(Member member);
         int Update(Member member);

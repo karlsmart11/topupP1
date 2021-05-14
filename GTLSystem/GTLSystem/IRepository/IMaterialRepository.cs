@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GTLSystem.IRepository
 {
-    public interface IMaterial
+    public interface IMaterialRepository
     {
         void Insert(Material material);
         bool Update(Material material);

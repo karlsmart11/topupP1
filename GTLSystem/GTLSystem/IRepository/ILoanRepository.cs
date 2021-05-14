@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GTLSystem.IRepository
 {
-    public interface ILoan
+    public interface ILoanRepository
     {
         void Insert(Loan loan);
         int Update(Loan loan);
