@@ -7,9 +7,9 @@ namespace GTLSystem.IRepository
 {
     public interface IMemberRepository
     {
-        void Insert(Member member);
-        int Update(Member member);
-        int Delete(string memberSSN);
+        bool Insert(Member member);
+        bool Update(Member member);
+        bool Delete(string memberSSN);
         Member GetBySSN(string SSN);
         IEnumerable<Member> GetAllMembers();
     }

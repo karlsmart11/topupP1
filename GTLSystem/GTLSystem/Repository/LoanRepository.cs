@@ -23,11 +23,21 @@ namespace GTLSystem.Repository
             this.connection = connection;
         }
 
-        public int Delete(string loanID)
+        public bool Delete(string loanID)
         {
+            bool result = true;
             var con = connection.CreateConnection();
 
-            return con.Execute(@"DELETE FROM [dbo].[Loan] WHERE Id = " + loanID);
+            try
+            {
+                con.Execute(@"DELETE FROM [dbo].[Loan] WHERE Id = " + loanID);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         public Loan GetNewestLoan()
@@ -37,8 +47,9 @@ namespace GTLSystem.Repository
             return con.QueryFirst<Loan>("SELECT TOP 1 * FROM Loan ORDER BY LoanId DESC");
         }
 
-        public void Insert(Loan loan)
+        public bool Insert(Loan loan)
         {
+            bool result = true;
             var con = connection.CreateConnection();
 
 
@@ -49,17 +60,33 @@ namespace GTLSystem.Repository
            (@StartDate,
             @MemberSSN)";
 
-            con.Execute(insertQuery, loan);
+            try
+            {
+                con.Execute(insertQuery, loan);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
-        public int MaterialCountBySSN(string memberSSN)
+        public int? MaterialCountBySSN(string memberSSN)
         {
             var con = connection.CreateConnection();
 
-            return con.QuerySingle<int>("SELECT COUNT(MaterialId) FROM Loan INNER JOIN MaterialLoan ON Loan.LoanId = MaterialLoan.LoanId WHERE Loan.MemberSSN = '" + memberSSN + "'");
+            try
+            {
+                return con.QuerySingle<int>("SELECT COUNT(MaterialId) FROM Loan INNER JOIN MaterialLoan ON Loan.LoanId = MaterialLoan.LoanId WHERE Loan.MemberSSN = '" + memberSSN + "'");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public int Update(Loan loan)
+        public bool Update(Loan loan)
         {
             throw new NotImplementedException();
         }

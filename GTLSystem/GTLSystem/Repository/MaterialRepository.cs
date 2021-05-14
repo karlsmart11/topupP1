@@ -23,18 +23,35 @@ namespace GTLSystem.Repository
             this.connection = connection;
         }
 
-        public int Delete(string materialId)
+        public bool Delete(string materialId)
         {
+            bool result = true;
             var con = connection.CreateConnection();
 
-            return con.Execute(@"DELETE FROM [dbo].[Material] WHERE Id = " + materialId);
+            try
+            {
+                con.Execute(@"DELETE FROM [dbo].[Material] WHERE Id = " + materialId);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         public IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available)
         {
             var con = connection.CreateConnection();
 
-            return con.Query<Material>("GetAvailableMaterial", new { ISBN = titleISBN, Available = available }, commandType: CommandType.StoredProcedure);
+            try
+            {
+                return con.Query<Material>("GetAvailableMaterial", new { ISBN = titleISBN, Available = available }, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Material> GetAvailableMaterials()
@@ -55,23 +72,37 @@ namespace GTLSystem.Repository
             return result;
         }
 
-        public int GetNumberOfAvailable()
+        public int? GetNumberOfAvailable()
         {
             var con = connection.CreateConnection();
 
-            return con.QuerySingle<int>("SELECT COUNT(Available) FROM Material WHERE Available = 1");
+            try
+            {
+                return con.QuerySingle<int>("SELECT COUNT(Available) FROM Material WHERE Available = 1");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public int GetNumberOfUnavailable()
+        public int? GetNumberOfUnavailable()
         {
             var con = connection.CreateConnection();
 
-            return con.QuerySingle<int>("SELECT COUNT(Available) FROM Material WHERE Available = 0");
-
+            try
+            {
+                return con.QuerySingle<int>("SELECT COUNT(Available) FROM Material WHERE Available = 0");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public void Insert(Material material)
+        public bool Insert(Material material)
         {
+            bool result = true;
             var con = connection.CreateConnection();
 
             string insertQuery = @"INSERT INTO Material 
@@ -83,7 +114,16 @@ namespace GTLSystem.Repository
             @ISBN,
             @Available)";
 
-            con.Execute(insertQuery, material);
+            try
+            {
+                con.Execute(insertQuery, material);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         public bool Update(Material material)
@@ -105,9 +145,8 @@ namespace GTLSystem.Repository
             catch (Exception)
             {
                 result = false;
-                //Console.WriteLine("THIS IS NOT A DRILL");
-                //Console.WriteLine(e);
             }
+
             return result;
         }
     }

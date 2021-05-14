@@ -7,10 +7,10 @@ namespace GTLSystem.IRepository
 {
     public interface ILoanRepository
     {
-        void Insert(Loan loan);
-        int Update(Loan loan);
-        int Delete(string loanId);
+        bool Insert(Loan loan);
+        bool Update(Loan loan);
+        bool Delete(string loanId);
         Loan GetNewestLoan();
-        int MaterialCountBySSN(string SSN);
+        int? MaterialCountBySSN(string SSN);
     }
 }

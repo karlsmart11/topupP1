@@ -7,9 +7,9 @@ namespace GTLSystem.IRepository
 {
     public interface ITitleRepository
     {
-        void Insert(Title title);
-        int Update(Title title);
-        int Delete(string titleISBN);
+        bool Insert(Title title);
+        bool Update(Title title);
+        bool Delete(string titleISBN);
         Title GetByISBN(string ISBN);
     }
 }

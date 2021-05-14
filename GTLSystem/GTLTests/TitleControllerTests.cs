@@ -65,16 +65,17 @@ namespace GTLTests
 
         private Title GetSampleTitle()
         {
-            return new Title { Author = "testAuthor",
-                               Description = "testDesc",
-                               Available = true,
-                               ISBN = "testISBN",
-                               Loanable = true,
-                               Requested = false,
-                               Subject = "testSubject",
-                               TitleName = "testTitleName"};
-        }
-
-        
+            return new Title 
+            { 
+                Author = "testAuthor",
+                Description = "testDesc",
+                Available = true,
+                ISBN = "testISBN",
+                Loanable = true,
+                Requested = false,
+                Subject = "testSubject",
+                TitleName = "testTitleName"
+            };
+        }        
     }
 }
