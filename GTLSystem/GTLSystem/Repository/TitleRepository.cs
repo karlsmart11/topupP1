@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GTLSystem.Repository
 {
-    public class TitleRepository : ITitle
+    public class TitleRepository : ITitleRepository
     {
         private DbConnection connection;
 

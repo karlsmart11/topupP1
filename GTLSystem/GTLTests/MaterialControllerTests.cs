@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GTLTests
 {
-    class MaterialRepositoryTests
+    class MaterialControllerTests
     {
         [TestMethod]
         public void Test_Get_Available_Materials()

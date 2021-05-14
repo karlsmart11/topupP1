@@ -9,9 +9,9 @@ namespace GTLSystem.Controller
 {
     public class MemberController
     {
-        private IMember memberRepository;
+        private IMemberRepository memberRepository;
 
-        public MemberController(IMember memberRepo)
+        public MemberController(IMemberRepository memberRepo)
         {
             memberRepository = memberRepo;
         }

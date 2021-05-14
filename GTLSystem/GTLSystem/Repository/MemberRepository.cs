@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GTLSystem.Repository
 {
-    public class MemberRepository : IMember
+    public class MemberRepository : IMemberRepository
     {
 
         public int Delete(string memberSSN)
