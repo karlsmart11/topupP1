@@ -10,7 +10,7 @@ namespace GTLSystem.Controller
     public class MaterialLoanController
     {
         static DbConnection connection = new DbConnection();
-        private IMaterialLoan materialLoanRepository = new MaterialLoanRepository(connection);
+        private IMaterialLoanRepository materialLoanRepository = new MaterialLoanRepository(connection);
         public bool CreateMaterialLoan(Loan loan, Material material)
         {
             MaterialLoan materialLoan = new MaterialLoan() { LoanId = loan.LoanId, MaterialId = material.MaterialId };
