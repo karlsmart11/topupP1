@@ -10,7 +10,7 @@ namespace GTLSystem.Controller
     public class MaterialController
     {
         static DbConnection connection = new DbConnection();
-        private IMaterial materialRepository = new MaterialRepository(connection);
+        private IMaterialRepository materialRepository = new MaterialRepository(connection);
 
         public bool RegisterMaterial(Material material)
         {

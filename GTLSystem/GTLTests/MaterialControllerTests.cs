@@ -16,7 +16,7 @@ namespace GTLTests
 
             //Act
             var value = materialRepository.GetAvailableMaterials();
-            bool result;
+            //bool result;
 
             foreach (var item in value)
             {

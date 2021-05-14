@@ -11,7 +11,7 @@ namespace GTLSystem.Controller
     {
         static DbConnection connection = new DbConnection();
 
-        private IMember memberRepository = new MemberRepository(connection);
+        private IMemberRepository memberRepository = new MemberRepository(connection);
 
         public MemberController(IMemberRepository memberRepo)
         {

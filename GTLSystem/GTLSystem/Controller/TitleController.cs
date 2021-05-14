@@ -11,7 +11,7 @@ namespace GTLSystem.Controller
     {
         static DbConnection connection = new DbConnection();
 
-        private ITitle titleRepository = new TitleRepository(connection);
+        private ITitleRepository titleRepository = new TitleRepository(connection);
 
         public bool RegisterTitle(Title title)
         {

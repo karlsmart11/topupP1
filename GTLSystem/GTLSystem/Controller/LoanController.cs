@@ -12,10 +12,10 @@ namespace GTLSystem.Controller
     {
         static DbConnection connection = new DbConnection();
 
-        private IMember memberRepository = new MemberRepository(connection);
-        private ILoan loanRepository = new LoanRepository(connection);
-        private ITitle titleRepository = new TitleRepository(connection);
-        private IMaterial materialRepository = new MaterialRepository(connection);
+        private IMemberRepository memberRepository = new MemberRepository(connection);
+        private ILoanRepository loanRepository = new LoanRepository(connection);
+        private ITitleRepository titleRepository = new TitleRepository(connection);
+        private IMaterialRepository materialRepository = new MaterialRepository(connection);
         private MaterialController materialController = new MaterialController();
         private MaterialLoanController materialLoanController = new MaterialLoanController();
 
