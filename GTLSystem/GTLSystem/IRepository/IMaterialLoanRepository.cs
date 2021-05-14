@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GTLSystem.IRepository
 {
-    public interface IMaterialLoan
+    public interface IMaterialLoanRepository
     {
         bool Insert(MaterialLoan materialLoan);
     }

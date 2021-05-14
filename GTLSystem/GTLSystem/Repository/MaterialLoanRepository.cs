@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GTLSystem.Repository
 {
-    public class MaterialLoanRepository : IMaterialLoan
+    public class MaterialLoanRepository : IMaterialLoanRepository
     {
         private DbConnection connection;
 
