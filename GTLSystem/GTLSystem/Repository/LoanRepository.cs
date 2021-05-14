@@ -11,33 +11,35 @@ namespace GTLSystem.Repository
 {
     public class LoanRepository : ILoan
     {
+        private DbConnection connection;
+
+        public LoanRepository()
+        {
+
+        }
+
+        public LoanRepository(DbConnection connection)
+        {
+            this.connection = connection;
+        }
 
         public int Delete(string loanID)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.Execute(@"DELETE FROM [dbo].[Loan] WHERE Id = " + loanID);
         }
 
         public Loan GetNewestLoan()
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.QueryFirst<Loan>("SELECT TOP 1 * FROM Loan ORDER BY LoanId DESC");
         }
 
         public void Insert(Loan loan)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
 
             string insertQuery = @"INSERT INTO Loan
@@ -52,10 +54,7 @@ namespace GTLSystem.Repository
 
         public int MaterialCountBySSN(string memberSSN)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.QuerySingle<int>("SELECT COUNT(MaterialId) FROM Loan INNER JOIN MaterialLoan ON Loan.LoanId = MaterialLoan.LoanId WHERE Loan.MemberSSN = '" + memberSSN + "'");
         }

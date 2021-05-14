@@ -1,4 +1,5 @@
-﻿using GTLSystem.Model;
+﻿using GTLSystem.IRepository;
+using GTLSystem.Model;
 using GTLSystem.Repository;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,8 @@ namespace GTLSystem.Controller
 {
     public class MaterialLoanController
     {
-        MaterialLoanRepository materialLoanRepository = new MaterialLoanRepository();
+        static DbConnection connection = new DbConnection();
+        private IMaterialLoan materialLoanRepository = new MaterialLoanRepository(connection);
         public bool CreateMaterialLoan(Loan loan, Material material)
         {
             MaterialLoan materialLoan = new MaterialLoan() { LoanId = loan.LoanId, MaterialId = material.MaterialId };

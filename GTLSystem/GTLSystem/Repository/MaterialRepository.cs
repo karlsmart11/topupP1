@@ -11,22 +11,28 @@ namespace GTLSystem.Repository
 {
     public class MaterialRepository : IMaterial
     {
+        private DbConnection connection;
+
+        public MaterialRepository()
+        {
+
+        }
+
+        public MaterialRepository(DbConnection connection)
+        {
+            this.connection = connection;
+        }
+
         public int Delete(string materialId)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.Execute(@"DELETE FROM [dbo].[Material] WHERE Id = " + materialId);
         }
 
         public IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.Query<Material>("GetAvailableMaterial", new { ISBN = titleISBN, Available = available }, commandType: CommandType.StoredProcedure);
         }
@@ -35,10 +41,7 @@ namespace GTLSystem.Repository
         {
             IEnumerable<Material> result;
 
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             try
             {
@@ -54,20 +57,14 @@ namespace GTLSystem.Repository
 
         public int GetNumberOfAvailable()
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.QuerySingle<int>("SELECT COUNT(Available) FROM Material WHERE Available = 1");
         }
 
         public int GetNumberOfUnavailable()
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.QuerySingle<int>("SELECT COUNT(Available) FROM Material WHERE Available = 0");
 
@@ -75,10 +72,7 @@ namespace GTLSystem.Repository
 
         public void Insert(Material material)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             string insertQuery = @"INSERT INTO Material 
             (Type,
@@ -95,10 +89,7 @@ namespace GTLSystem.Repository
         public bool Update(Material material)
         {
             bool result = true;
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             string updateQuery = @"UPDATE Material
             Set

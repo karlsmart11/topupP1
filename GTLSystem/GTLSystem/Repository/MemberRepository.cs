@@ -10,13 +10,21 @@ namespace GTLSystem.Repository
 {
     public class MemberRepository : IMember
     {
+        private DbConnection connection;
+
+        public MemberRepository()
+        {
+
+        }
+
+        public MemberRepository(DbConnection connection)
+        {
+            this.connection = connection;
+        }
 
         public int Delete(string memberSSN)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.Execute(@"DELETE FROM [dbo].[Member] WHERE SSN = " + memberSSN);
 
@@ -26,10 +34,7 @@ namespace GTLSystem.Repository
         {
             IEnumerable<Member> result;
 
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             try
             {
@@ -47,10 +52,7 @@ namespace GTLSystem.Repository
         {
             Member result;
 
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             string query = @"SELECT * FROM [dbo].[Member] where SSN = " + memberSSN;
 

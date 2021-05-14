@@ -1,4 +1,5 @@
-﻿using GTLSystem.Model;
+﻿using GTLSystem.IRepository;
+using GTLSystem.Model;
 using GTLSystem.Repository;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,14 @@ namespace GTLSystem.Controller
 {
     public class LoanController        
     {
-        private static DbConnection connection;
+        static DbConnection connection = new DbConnection();
 
-        MemberRepository memberRepository = new MemberRepository();
-        LoanRepository loanRepository = new LoanRepository();
-        TitleRepository titleRepository = new TitleRepository(connection);
-        MaterialRepository materialRepository = new MaterialRepository();
-        MaterialController materialController = new MaterialController();
-        MaterialLoanController materialLoanController = new MaterialLoanController();
+        private IMember memberRepository = new MemberRepository(connection);
+        private ILoan loanRepository = new LoanRepository(connection);
+        private ITitle titleRepository = new TitleRepository(connection);
+        private IMaterial materialRepository = new MaterialRepository(connection);
+        private MaterialController materialController = new MaterialController();
+        private MaterialLoanController materialLoanController = new MaterialLoanController();
 
         // Generate random loans as test data
         public bool GenerateLoans(int amount)

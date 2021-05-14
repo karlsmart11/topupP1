@@ -1,4 +1,5 @@
-﻿using GTLSystem.Model;
+﻿using GTLSystem.IRepository;
+using GTLSystem.Model;
 using GTLSystem.Repository;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,8 @@ namespace GTLSystem.Controller
 {
     public class MaterialController
     {
-        MaterialRepository materialRepository = new MaterialRepository();
+        static DbConnection connection = new DbConnection();
+        private IMaterial materialRepository = new MaterialRepository(connection);
 
         public bool RegisterMaterial(Material material)
         {

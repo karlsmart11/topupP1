@@ -21,10 +21,7 @@ namespace GTLSystem.Repository
 
         public int Delete(string titleISBN)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             return con.Execute(@"DELETE FROM [dbo].[Title] WHERE ISBN = " + titleISBN); 
         }
@@ -49,10 +46,7 @@ namespace GTLSystem.Repository
 
         public void Insert(Title title)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             string insertQuery = @"INSERT INTO Title 
             (ISBN, 

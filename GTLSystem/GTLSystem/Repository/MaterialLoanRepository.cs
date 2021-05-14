@@ -10,12 +10,21 @@ namespace GTLSystem.Repository
 {
     public class MaterialLoanRepository : IMaterialLoan
     {
+        private DbConnection connection;
+
+        public MaterialLoanRepository()
+        {
+
+        }
+
+        public MaterialLoanRepository(DbConnection connection)
+        {
+            this.connection = connection;
+        }
+
         public void Insert(MaterialLoan materialLoan)
         {
-            var cs = @"Server=localhost\SQLEXPRESS;Database=GTL;Trusted_Connection=True;";
-
-            using var con = new SqlConnection(cs);
-            con.Open();
+            var con = connection.CreateConnection();
 
             string insertQuery = @"INSERT INTO MaterialLoan 
             (MaterialId, 

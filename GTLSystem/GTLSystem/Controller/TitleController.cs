@@ -1,4 +1,5 @@
-﻿using GTLSystem.Model;
+﻿using GTLSystem.IRepository;
+using GTLSystem.Model;
 using GTLSystem.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace GTLSystem.Controller
     {
         static DbConnection connection = new DbConnection();
 
-        TitleRepository titleRepository = new TitleRepository(connection);
+        private ITitle titleRepository = new TitleRepository(connection);
 
         public bool RegisterTitle(Title title)
         {
