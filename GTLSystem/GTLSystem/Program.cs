@@ -1,12 +1,6 @@
-﻿using Dapper;
-using GTLSystem.Controller;
-using GTLSystem.IRepository;
-using GTLSystem.Model;
+﻿using GTLSystem.Controller;
 using GTLSystem.Repository;
 using GTLSystem.TUI;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Data.SqlClient;
 
 namespace GTLSystem
 {

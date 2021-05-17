@@ -1,9 +1,7 @@
 ﻿using GTLSystem.Controller;
 using GTLSystem.Model;
-using GTLSystem.Repository;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GTLSystem.TUI
 {
