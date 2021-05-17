@@ -14,13 +14,10 @@ namespace GTLSystem.Controller
 
         private IMemberRepository memberRepository = new MemberRepository(connection);
         private ILoanRepository loanRepository = new LoanRepository(connection);
-        private ITitleRepository titleRepository = new TitleRepository(connection);
         private IMaterialRepository materialRepository = new MaterialRepository(connection);
-        private MaterialController materialController = new MaterialController();
-        private MaterialLoanController materialLoanController = new MaterialLoanController();
 
         // Generate random loans as test data
-        public bool GenerateLoans(int amount)
+        public bool GenerateLoans(int amount, ControllerContainer controllers)
         {
             bool result = true;
             List<Member> members = new List<Member>();
@@ -32,7 +29,7 @@ namespace GTLSystem.Controller
             {
                 members.Add(item);
             }
-            foreach (var item in materialRepository.GetAvailableMaterials())
+            foreach (var item in controllers.materialController.GetAvailableMaterials())
             {
                 allMaterials.Add(item);
             }
@@ -62,7 +59,7 @@ namespace GTLSystem.Controller
                 {
                     var index = random.Next(0, allMaterials.Count());
                     materials.Add(allMaterials[index]);
-                    materialController.ReserveMaterial(allMaterials[index]);
+                    controllers.materialController.ReserveMaterial(allMaterials[index]);
                     allMaterials.RemoveAt(index);
 
                     Console.WriteLine("Material " + (j+1) + " added to loan");
@@ -94,7 +91,7 @@ namespace GTLSystem.Controller
                     {
                         try
                         {
-                            materialLoanController.CreateMaterialLoan(loan, material);
+                            controllers.materialLoanController.CreateMaterialLoan(loan, material);
                         }
                         catch (Exception)
                         {
@@ -112,7 +109,7 @@ namespace GTLSystem.Controller
             return result;
         }
 
-        public int RegisterLoan(String ssn, List<string> isbns)
+        public int RegisterLoan(String ssn, List<string> isbns, ControllerContainer controllers)
         {
             int result = 1;
             Member member = memberRepository.GetBySSN(ssn);
@@ -126,7 +123,7 @@ namespace GTLSystem.Controller
                 if (material.Count() > 0)
                 {
                     materials.Add(material.First());
-                    materialController.ReserveMaterial(material.First());
+                    controllers.materialController.ReserveMaterial(material.First());
                 }
                 else
                 {
@@ -162,7 +159,7 @@ namespace GTLSystem.Controller
                 {
                     try
                     {
-                        materialLoanController.CreateMaterialLoan(loan, material);
+                        controllers.materialLoanController.CreateMaterialLoan(loan, material);
                     }
                     catch (Exception)
                     {

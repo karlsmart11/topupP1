@@ -1,5 +1,6 @@
 ﻿using GTLSystem.Controller;
 using GTLSystem.Model;
+using GTLSystem.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,22 +9,18 @@ namespace GTLSystem.TUI
 {
     public static class Tui
     {
-        private static readonly LoanController loanController = new LoanController();
-        private static readonly MaterialController materialController = new MaterialController();
-        private static readonly TitleController titleController = new TitleController();
-
-        public static void GenerateLoans(int amount)
+        public static void GenerateLoans(int amount, ControllerContainer controllers)
         {
             var loancontroller = new LoanController();
-            loancontroller.GenerateLoans(amount);
+            loancontroller.GenerateLoans(amount, controllers);
         }
 
-        public static void Start()
+        public static void Start(ControllerContainer controllers)
         {
-            MainMenu();
+            MainMenu(controllers);
         }
 
-        private static void RegisterLoan()
+        private static void RegisterLoan(ControllerContainer controllers)
         {
 
             Console.Clear();
@@ -34,7 +31,7 @@ namespace GTLSystem.TUI
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
 
-            int? currNoOfMaterials = loanController.GetCurrentNoOfMaterialsBySSN(SSN);
+            int? currNoOfMaterials = controllers.loanController.GetCurrentNoOfMaterialsBySSN(SSN);
 
 
             Console.WriteLine();
@@ -51,7 +48,7 @@ namespace GTLSystem.TUI
                 {
                     i = 5 - currNoOfMaterials;
                 }
-                else if (!titleController.checkISBN(input))
+                else if (!controllers.titleController.checkISBN(input))
                 {
                     Console.WriteLine("ISBN not found");
                     Console.WriteLine();
@@ -62,7 +59,7 @@ namespace GTLSystem.TUI
                     isbns.Add(input);
                 }
             }
-            var res = loanController.RegisterLoan(SSN, isbns);
+            var res = controllers.loanController.RegisterLoan(SSN, isbns, controllers);
 
             // Check if loan has been registered
             if (res == 1)
@@ -81,9 +78,9 @@ namespace GTLSystem.TUI
             AnyKey();
         }
 
-        private static void GetNumberOfAvailable()
+        private static void GetNumberOfAvailable(ControllerContainer controllers)
         {
-            int? noOfMaterials = materialController.GetNumberOfAvailableMaterials();
+            int? noOfMaterials = controllers.materialController.GetNumberOfAvailableMaterials();
 
             if (noOfMaterials >= 0)
             {
@@ -97,9 +94,9 @@ namespace GTLSystem.TUI
             AnyKey();
         }
 
-        private static void GetNumberOfUnavailable()
+        private static void GetNumberOfUnavailable(ControllerContainer controllers)
         {
-            int? noOfMaterials = materialController.GetNumberOfUnavailableMaterials();
+            int? noOfMaterials = controllers.materialController.GetNumberOfUnavailableMaterials();
 
             if (noOfMaterials >= 0)
             {
@@ -113,12 +110,12 @@ namespace GTLSystem.TUI
             AnyKey();
         }
 
-        private static void GetTitleByISBN()
+        private static void GetTitleByISBN(ControllerContainer controllers)
         {
             Console.Write("Please Enter ISBN: ");
             string ISBN = Console.ReadLine();
 
-            Title title = titleController.GetByISBN(ISBN);
+            Title title = controllers.titleController.GetByISBN(ISBN);
 
             if (title != null)
             {
@@ -132,7 +129,7 @@ namespace GTLSystem.TUI
             AnyKey();
         }
 
-        private static void MainMenu()
+        private static void MainMenu(ControllerContainer controllers)
         {
             Console.Clear();
             Console.WriteLine("Georgia Tech Library Reservation system Inc.");
@@ -162,18 +159,18 @@ namespace GTLSystem.TUI
                 switch (option)
                 {
                     case 1:
-                        RegisterLoan();
+                        RegisterLoan(controllers);
                         break;
 
                     case 2:
-                        GetNumberOfAvailable();
+                        GetNumberOfAvailable(controllers);
                         break;
 
                     case 3:
-                        GetNumberOfUnavailable();
+                        GetNumberOfUnavailable(controllers);
                         break;
                     case 4:
-                        GetTitleByISBN();
+                        GetTitleByISBN(controllers);
                         break;
                 }
 
@@ -184,11 +181,11 @@ namespace GTLSystem.TUI
                 Console.WriteLine("Invalid Menu Entry");    
                 Console.WriteLine(e); //for debugging
                 AnyKey();
-                MainMenu();
+                MainMenu(controllers);
             }
 
             // Reprint main menu for continuity, use exit to end process
-            MainMenu();
+            MainMenu(controllers);
         }
 
         private static void AnyKey()

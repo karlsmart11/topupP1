@@ -14,7 +14,10 @@ namespace GTLSystem
     {
         static void Main(string[] args)
         {
-            Tui.Start();
+
+            ControllerContainer controllerContainer = new ControllerContainer(new DbConnection());
+
+            Tui.Start(controllerContainer);
 
             //Tui.GenerateLoans(200);
 
@@ -41,19 +44,6 @@ namespace GTLSystem
             }
 
             */
-        }
-
-        private void ConfigureServices(IServiceCollection services)
-        {
-            //DB
-            services.AddSingleton(new DbConnection());
-
-            //Repo
-            services.AddSingleton<ILoanRepository, LoanRepository>();
-            services.AddSingleton<IMaterialRepository, MaterialRepository>();
-            services.AddSingleton<IMaterialLoanRepository, MaterialLoanRepository>();
-            services.AddSingleton<IMemberRepository, MemberRepository>();
-            services.AddSingleton<ITitleRepository, TitleRepository>();
         }
     }
 }

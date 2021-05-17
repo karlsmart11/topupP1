@@ -57,6 +57,11 @@ namespace GTLSystem.Controller
             return result;
         }
 
+        public IEnumerable<Material> GetAvailableMaterials()
+        {
+            return _materialRepository.GetAvailableMaterials();
+        }
+
         public int? GetNumberOfAvailableMaterials()
         {
             int? res;

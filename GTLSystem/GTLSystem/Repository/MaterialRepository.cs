@@ -11,17 +11,17 @@ namespace GTLSystem.Repository
 {
     public class MaterialRepository : IMaterialRepository
     {
-        private DbConnection connection;
+        private DbConnection _connection;
 
         public MaterialRepository(DbConnection connection)
         {
-            this.connection = connection;
+            _connection = connection;
         }
 
         public bool Delete(string materialId)
         {
             bool result = true;
-            var con = connection.CreateConnection();
+            var con = _connection.CreateConnection();
 
             try
             {
@@ -37,7 +37,7 @@ namespace GTLSystem.Repository
 
         public IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available)
         {
-            var con = connection.CreateConnection();
+            var con = _connection.CreateConnection();
 
             try
             {
@@ -53,7 +53,7 @@ namespace GTLSystem.Repository
         {
             IEnumerable<Material> result;
 
-            var con = connection.CreateConnection();
+            var con = _connection.CreateConnection();
 
             try
             {
@@ -69,7 +69,7 @@ namespace GTLSystem.Repository
 
         public int? GetNumberOfAvailable()
         {
-            var con = connection.CreateConnection();
+            var con = _connection.CreateConnection();
 
             try
             {
@@ -83,7 +83,7 @@ namespace GTLSystem.Repository
 
         public int? GetNumberOfUnavailable()
         {
-            var con = connection.CreateConnection();
+            var con = _connection.CreateConnection();
 
             try
             {
@@ -98,7 +98,7 @@ namespace GTLSystem.Repository
         public bool Insert(Material material)
         {
             bool result = true;
-            var con = connection.CreateConnection();
+            var con = _connection.CreateConnection();
 
             string insertQuery = @"INSERT INTO Material 
             (Type,
@@ -124,7 +124,7 @@ namespace GTLSystem.Repository
         public bool Update(Material material)
         {
             bool result = true;
-            var con = connection.CreateConnection();
+            var con = _connection.CreateConnection();
 
             string updateQuery = @"UPDATE Material
             Set
