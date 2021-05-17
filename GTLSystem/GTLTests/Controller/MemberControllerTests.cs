@@ -10,6 +10,7 @@ using System.Text;
 
 namespace GTLTests
 {
+    [TestClass]
     class MemberControllerTests
     {
         [TestMethod]

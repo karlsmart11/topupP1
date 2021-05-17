@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GTLSystem.Repository;
 using GTLSystem.IRepository;
-using GTLSystem.Controller;
 using GTLSystem.Model;
 using FluentAssertions;
 using Autofac.Extras.Moq;
-using Moq;
 
 namespace GTLTests
 {
