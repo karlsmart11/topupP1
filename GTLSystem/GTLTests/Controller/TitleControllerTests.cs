@@ -47,44 +47,35 @@ namespace GTLTests
         [TestMethod]
         public void Test_Title_Get_By_Correct_ISBN()
         {
-            //Arrange
-            DbConnection connection = new DbConnection();
-            string input = "000458743-X";
+            string input = "correct";
 
-            Title model = new Title() { 
-                ISBN = "000458743-X", 
-                Requested = false,
-                TitleName = "Janky Promoters, The",
-                Description = "alazdmzuhywkqxlblyoxqfprdllqahhzkubvvrhduqfcgvducubpwhqyuaztwqpbvvpmecftsuobiqbnlqxfvbhzfuxpmvhkjh",
-                Author = "Vere Gostridge",
-                Subject = "throughput",
-                Loanable = true
-            };
+            using var mock = AutoMock.GetLoose();
 
-            TitleRepository titleRepository = new TitleRepository(connection);
+            mock.Mock<ITitleRepository>()
+                .Setup(x => x.GetByISBN(input)).Returns(GetSampleTitle());
 
-            //Act
-            Title title = titleRepository.GetByISBN(input);
+            var ctrl = mock.Create<TitleController>();
 
-            //Assert
-            title.Should().BeEquivalentTo(model);
+            var obj = ctrl.GetByISBN(input);
+
+            obj.Should().BeEquivalentTo(GetSampleTitle());
         }
 
         [TestMethod]
         public void Test_Title_Get_By_Incorrect_ISBN()
         {
+            string input = "incorrect";
+
             using var mock = AutoMock.GetLoose();
-            //arrange
-            string wrongInput = "wrongInput";
+
             mock.Mock<ITitleRepository>()
-                .Setup(x => x.GetByISBN(wrongInput))
-                .Returns(GetSampleNullTitle);
+                .Setup(x => x.GetByISBN(input)).Returns(GetSampleNullTitle);
 
-            //Act
-            var res = mock.Create<TitleRepository>().GetByISBN(wrongInput);
+            var ctrl = mock.Create<TitleController>();
 
-            //Assert
-            res.Should().BeNull();
+            var obj = ctrl.GetByISBN(input);
+
+            obj.Should().BeEquivalentTo(GetSampleNullTitle());
         }
 
         private Title GetSampleNullTitle()
