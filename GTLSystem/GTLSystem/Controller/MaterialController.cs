@@ -94,5 +94,10 @@ namespace GTLSystem.Controller
 
             return res;
         }
+
+        public IEnumerable<Material> GetAvailableByISBN(string isbn, bool available)
+        {
+            return _materialRepository.GetAvailableByISBN(isbn, available);
+        }
     }
 }

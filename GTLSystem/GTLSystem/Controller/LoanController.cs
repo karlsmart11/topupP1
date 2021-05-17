@@ -12,9 +12,7 @@ namespace GTLSystem.Controller
     {
         static DbConnection connection = new DbConnection();
 
-        private IMemberRepository memberRepository = new MemberRepository(connection);
         private ILoanRepository loanRepository = new LoanRepository(connection);
-        private IMaterialRepository materialRepository = new MaterialRepository(connection);
 
         // Generate random loans as test data
         public bool GenerateLoans(int amount, ControllerContainer controllers)
@@ -25,7 +23,7 @@ namespace GTLSystem.Controller
             Member member;
             Random random = new Random();
 
-            foreach (var item in memberRepository.GetAllMembers())
+            foreach (var item in controllers.memberController.GetAllMembers())
             {
                 members.Add(item);
             }
@@ -112,13 +110,13 @@ namespace GTLSystem.Controller
         public int RegisterLoan(String ssn, List<string> isbns, ControllerContainer controllers)
         {
             int result = 1;
-            Member member = memberRepository.GetBySSN(ssn);
+            Member member = controllers.memberController.GetBySSN(ssn);
             List<Material> materials = new List<Material>();
             List<string> unavailable = new List<string>();
 
             foreach (var isbn in isbns)
             {
-                var material = materialRepository.GetAvailableByISBN(isbn, true);
+                var material = controllers.materialController.GetAvailableByISBN(isbn, true);
 
                 if (material.Count() > 0)
                 {

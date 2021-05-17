@@ -28,15 +28,14 @@ namespace GTLSystem.Controller
             return status;
         }
 
-        public bool GetAllMembers()
+        public IEnumerable<Member> GetAllMembers()
         {
-            bool status = true;
+            return _memberRepository.GetAllMembers();
+        }
 
-            if (_memberRepository.GetAllMembers() == null)
-            {
-                status = false;
-            }
-            return status;
+        public Member GetBySSN(string ssn)
+        {
+            return _memberRepository.GetBySSN(ssn);
         }
     }
 }
