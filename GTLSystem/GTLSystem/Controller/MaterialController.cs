@@ -27,14 +27,8 @@ namespace GTLSystem.Controller
         public bool RegisterMaterial(Material material)
         {
             bool result = true;
-            try
-            {
-                _materialRepository.Insert(material);
-            }
-            catch (Exception)
-            {
-                result = false;
-            }
+
+            if (!_materialRepository.Insert(material)) result = false;
 
             return result;
         }

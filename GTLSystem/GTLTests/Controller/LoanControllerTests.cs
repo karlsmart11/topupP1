@@ -12,24 +12,44 @@ namespace GTLSystem.Controller.Tests
         [TestMethod()]
         public void LoanControllerTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
 
         [TestMethod()]
         public void GenerateLoansTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
 
         [TestMethod()]
         public void RegisterLoanTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
 
         [TestMethod()]
         public void GetCurrentNoOfMaterialsBySSNTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
     }
