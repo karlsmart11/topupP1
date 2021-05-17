@@ -15,6 +15,7 @@ namespace GTLSystem
         static void Main(string[] args)
         {
             Tui.Start();
+
             //Tui.GenerateLoans(200);
 
             //MemberRepository memberRepository = new MemberRepository();

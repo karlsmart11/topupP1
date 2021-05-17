@@ -12,9 +12,16 @@ namespace GTLSystem.Controller
         //static DbConnection connection = new DbConnection();
         //private IMaterialRepository materialRepository = new MaterialRepository(connection);
 
-        private static IMaterialRepository materialRepository
+        //private static IMaterialRepository materialRepository
+        //{
+        //    get => ServiceLocator.GetRequiredService<IMaterialRepository>();
+        //}
+
+        IMaterialRepository _materialRepository;
+
+        public MaterialController(IMaterialRepository materialRepository)
         {
-            get => ServiceLocator.GetRequiredService<IMaterialRepository>();
+            _materialRepository = materialRepository;
         }
 
         public bool RegisterMaterial(Material material)
@@ -22,7 +29,7 @@ namespace GTLSystem.Controller
             bool result = true;
             try
             {
-                materialRepository.Insert(material);
+                _materialRepository.Insert(material);
             }
             catch (Exception)
             {
@@ -40,7 +47,7 @@ namespace GTLSystem.Controller
 
             try
             {                
-                materialRepository.Update(material);
+                _materialRepository.Update(material);
             }
             catch (Exception)
             {
@@ -56,7 +63,7 @@ namespace GTLSystem.Controller
 
             try
             {
-                res = materialRepository.GetNumberOfAvailable();
+                res = _materialRepository.GetNumberOfAvailable();
             }
             catch (Exception)
             {
@@ -73,7 +80,7 @@ namespace GTLSystem.Controller
 
             try
             {
-                res = materialRepository.GetNumberOfUnavailable();
+                res = _materialRepository.GetNumberOfUnavailable();
             }
             catch (Exception)
             {

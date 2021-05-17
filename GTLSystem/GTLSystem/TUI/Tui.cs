@@ -12,7 +12,6 @@ namespace GTLSystem.TUI
         private static readonly MaterialController materialController = new MaterialController();
         private static readonly TitleController titleController = new TitleController();
 
-
         public static void GenerateLoans(int amount)
         {
             var loancontroller = new LoanController();
