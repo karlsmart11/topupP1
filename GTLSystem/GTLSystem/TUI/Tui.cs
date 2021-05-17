@@ -35,7 +35,7 @@ namespace GTLSystem.TUI
             Console.WriteLine("Please Enter SSN");
             var SSN = Console.ReadLine();
 
-            int currNoOfMaterials = loanController.GetCurrentNoOfMaterialsBySSN(SSN);
+            int? currNoOfMaterials = loanController.GetCurrentNoOfMaterialsBySSN(SSN);
 
 
             Console.WriteLine();
@@ -43,7 +43,7 @@ namespace GTLSystem.TUI
             string input;
             var isbns = new List<string>();
 
-            for (int i = 0; i < 5 - currNoOfMaterials; i++)
+            for (int? i = 0; i < 5 - currNoOfMaterials; i++)
             {
                 Console.Write("item no " + (i+1) + ": ");
                 input = (string) Console.ReadLine();
@@ -84,7 +84,7 @@ namespace GTLSystem.TUI
 
         private static void GetNumberOfAvailable()
         {
-            int noOfMaterials = materialController.GetNumberOfAvailableMaterials();
+            int? noOfMaterials = materialController.GetNumberOfAvailableMaterials();
 
             if (noOfMaterials >= 0)
             {
@@ -100,7 +100,7 @@ namespace GTLSystem.TUI
 
         private static void GetNumberOfUnavailable()
         {
-            int noOfMaterials = materialController.GetNumberOfUnavailableMaterials();
+            int? noOfMaterials = materialController.GetNumberOfUnavailableMaterials();
 
             if (noOfMaterials >= 0)
             {
