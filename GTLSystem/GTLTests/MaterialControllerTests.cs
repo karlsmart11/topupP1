@@ -12,13 +12,13 @@ namespace GTLTests
         public void Test_Get_Available_Materials()
         {
             //Arrange
-            var materialRepository = new MaterialRepository();
+            //var materialRepository = new MaterialRepository();
 
             //Act
-            var value = materialRepository.GetAvailableMaterials();
+            //var value = materialRepository.GetAvailableMaterials();
             //bool result;
 
-            foreach (var item in value)
+            //foreach (var item in value)
             {
 
             }

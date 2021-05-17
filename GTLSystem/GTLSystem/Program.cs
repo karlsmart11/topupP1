@@ -7,13 +7,11 @@ using GTLSystem.TUI;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Data.SqlClient;
-using GTLSystem.IRepository;
 
 namespace GTLSystem
 {
     class Program
     {
-        private 
         static void Main(string[] args)
         {
             Tui.Start();
@@ -44,8 +42,12 @@ namespace GTLSystem
             */
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        private void ConfigureServices(IServiceCollection services)
         {
+            //DB
+            services.AddSingleton(new DbConnection());
+
+            //Repo
             services.AddSingleton<ILoanRepository, LoanRepository>();
             services.AddSingleton<IMaterialRepository, MaterialRepository>();
             services.AddSingleton<IMaterialLoanRepository, MaterialLoanRepository>();

@@ -9,8 +9,13 @@ namespace GTLSystem.Controller
 {
     public class MaterialController
     {
-        static DbConnection connection = new DbConnection();
-        private IMaterialRepository materialRepository = new MaterialRepository(connection);
+        //static DbConnection connection = new DbConnection();
+        //private IMaterialRepository materialRepository = new MaterialRepository(connection);
+
+        private static IMaterialRepository materialRepository
+        {
+            get => ServiceLocator.GetRequiredService<IMaterialRepository>();
+        }
 
         public bool RegisterMaterial(Material material)
         {

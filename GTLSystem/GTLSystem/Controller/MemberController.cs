@@ -9,14 +9,18 @@ namespace GTLSystem.Controller
 {
     public class MemberController
     {
-        static DbConnection connection = new DbConnection();
+        //static DbConnection connection = new DbConnection();
 
-        private IMemberRepository memberRepository = new MemberRepository(connection);
-
-        public MemberController(IMemberRepository memberRepo)
+        //private IMemberRepository memberRepository = new MemberRepository(connection);
+        private static IMemberRepository memberRepository
         {
-            memberRepository = memberRepo;
+            get => ServiceLocator.GetRequiredService<IMemberRepository>();
         }
+
+        //public MemberController(IMemberRepository memberRepo)
+        //{
+        //    memberRepository = memberRepo;
+        //}
 
         public bool CheckSSN(string SSN)
         {

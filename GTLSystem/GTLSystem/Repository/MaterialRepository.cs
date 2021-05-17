@@ -13,11 +13,6 @@ namespace GTLSystem.Repository
     {
         private DbConnection connection;
 
-        public MaterialRepository()
-        {
-
-        }
-
         public MaterialRepository(DbConnection connection)
         {
             this.connection = connection;

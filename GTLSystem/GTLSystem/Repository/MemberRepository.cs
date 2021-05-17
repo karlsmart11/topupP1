@@ -14,7 +14,6 @@ namespace GTLSystem.Repository
 
         public MemberRepository()
         {
-
         }
 
         public MemberRepository(DbConnection connection)
