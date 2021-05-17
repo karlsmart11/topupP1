@@ -21,12 +21,21 @@ namespace GTLSystem.Repository
             this.connection = connection;
         }
 
-        public int Delete(string memberSSN)
+        public bool Delete(string memberSSN)
         {
+            bool result = true;
             var con = connection.CreateConnection();
 
-            return con.Execute(@"DELETE FROM [dbo].[Member] WHERE SSN = " + memberSSN);
+            try
+            {
+                con.Execute(@"DELETE FROM [dbo].[Member] WHERE SSN = " + memberSSN);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
 
+            return result;
         }
 
         public IEnumerable<Member> GetAllMembers()
@@ -67,12 +76,12 @@ namespace GTLSystem.Repository
             return result;
         }
 
-        public void Insert(Member member)
+        public bool Insert(Member member)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(Member member)
+        public bool Update(Member member)
         {
             throw new NotImplementedException();
         }

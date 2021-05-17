@@ -19,11 +19,21 @@ namespace GTLSystem.Repository
             this.connection = connection;
         }
 
-        public int Delete(string titleISBN)
+        public bool Delete(string titleISBN)
         {
+            bool result = true;
             var con = connection.CreateConnection();
 
-            return con.Execute(@"DELETE FROM [dbo].[Title] WHERE ISBN = " + titleISBN); 
+            try
+            {
+                con.Execute(@"DELETE FROM [dbo].[Title] WHERE ISBN = " + titleISBN); 
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
 
@@ -44,8 +54,9 @@ namespace GTLSystem.Repository
             return result;
         }
 
-        public void Insert(Title title)
+        public bool Insert(Title title)
         {
+            bool result = true;
             var con = connection.CreateConnection();
 
             string insertQuery = @"INSERT INTO Title 
@@ -67,7 +78,16 @@ namespace GTLSystem.Repository
             @Subject, 
             @Loanable)";
 
-            con.Execute(insertQuery, title);
+            try
+            {
+                con.Execute(insertQuery, title);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         public object GetByISBN()
@@ -75,7 +95,7 @@ namespace GTLSystem.Repository
             throw new NotImplementedException();
         }
 
-        public int Update(Title title)
+        public bool Update(Title title)
         {
             throw new NotImplementedException();
         }

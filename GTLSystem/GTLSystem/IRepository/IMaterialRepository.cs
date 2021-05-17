@@ -7,12 +7,12 @@ namespace GTLSystem.IRepository
 {
     public interface IMaterialRepository
     {
-        void Insert(Material material);
+        bool Insert(Material material);
         bool Update(Material material);
-        int Delete(string materialId);
+        bool Delete(string materialId);
         IEnumerable<Material> GetAvailableByISBN(string titleISBN, bool available);
-        int GetNumberOfAvailable();
-        int GetNumberOfUnavailable();
+        int? GetNumberOfAvailable();
+        int? GetNumberOfUnavailable();
         IEnumerable<Material> GetAvailableMaterials();
 
     }

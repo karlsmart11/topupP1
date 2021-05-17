@@ -50,9 +50,9 @@ namespace GTLSystem.Controller
             return result;
         }
 
-        public int GetNumberOfAvailableMaterials()
+        public int? GetNumberOfAvailableMaterials()
         {
-            int res;
+            int? res;
 
             try
             {
@@ -67,9 +67,9 @@ namespace GTLSystem.Controller
             
         }
 
-        public int GetNumberOfUnavailableMaterials()
+        public int? GetNumberOfUnavailableMaterials()
         {
-            int res;
+            int? res;
 
             try
             {

@@ -22,8 +22,9 @@ namespace GTLSystem.Repository
             this.connection = connection;
         }
 
-        public void Insert(MaterialLoan materialLoan)
+        public bool Insert(MaterialLoan materialLoan)
         {
+            bool result = true;
             var con = connection.CreateConnection();
 
             string insertQuery = @"INSERT INTO MaterialLoan 
@@ -33,7 +34,16 @@ namespace GTLSystem.Repository
             (@MaterialId, 
             @LoanId)";
 
-            con.Execute(insertQuery, materialLoan);
+            try
+            {
+                con.Execute(insertQuery, materialLoan);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }
