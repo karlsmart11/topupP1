@@ -31,19 +31,6 @@ namespace GTLSystem.Controller.Tests
 
         }
 
-        [TestMethod()]
-        public void GetByISBNTest()
-        {
-
-        }
-    }
-}
-
-namespace GTLTests
-{
-    [TestClass]
-    public class TitleControllerTests
-    {
         [TestMethod]
         public void Test_Title_Get_By_Correct_ISBN()
         {
