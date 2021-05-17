@@ -14,19 +14,43 @@ namespace GTLSystem.Controller.Tests
     public class TitleControllerTests
     {
         [TestMethod()]
-        public void TitleControllerTest()
+        public void RegisterCorrectTitleTest()
         {
             //Arrange
+            var title = GetSampleTitle();
+
+            using var mock = AutoMock.GetLoose();
+
+            mock.Mock<ITitleRepository>()
+                .Setup(x => x.Insert(title)).Returns(true);
+
+            var ctrl = mock.Create<TitleController>();
+
             //Act
+            var result = ctrl.RegisterTitle(title);
+
             //Assert
+            result.Should().BeTrue();
         }
 
         [TestMethod()]
-        public void RegisterTitleTest()
+        public void RegisterIncorrectTitleTest()
         {
             //Arrange
+            var title = GetSampleNullTitle();
+
+            using var mock = AutoMock.GetLoose();
+
+            mock.Mock<ITitleRepository>()
+                .Setup(x => x.Insert(title)).Returns(false);
+
+            var ctrl = mock.Create<TitleController>();
+
             //Act
+            var result = ctrl.RegisterTitle(title);
+
             //Assert
+            result.Should().BeFalse();
         }
 
         [TestMethod()]

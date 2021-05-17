@@ -18,17 +18,14 @@ namespace GTLSystem.Controller
 
         public bool RegisterTitle(Title title)
         {
-            bool result = true;
-            try
+            if (_titleRepository.Insert(title))
             {
-                _titleRepository.Insert(title);
+                return true;
             }
-            catch (Exception)
+            else
             {
-                result = false;
+                return false;
             }
-
-            return result;
         }
 
         public bool checkISBN(string input)
