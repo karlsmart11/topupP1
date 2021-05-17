@@ -7,6 +7,7 @@ using GTLSystem.Model;
 using Autofac.Extras.Moq;
 using GTLSystem.IRepository;
 using FluentAssertions;
+using System.Linq;
 
 namespace GTLSystem.Controller.Tests
 {
@@ -17,10 +18,7 @@ namespace GTLSystem.Controller.Tests
         public void RegisterMaterialTestTrue()
         {
             //Arrange
-            Material material = new Material { Available = true,
-                                               ISBN = "test",
-                                               MaterialId = 0,
-                                               Type = "test"};
+            Material material = getSampleMaterials()[0];
 
             using var mock = AutoMock.GetLoose();
 
@@ -41,13 +39,7 @@ namespace GTLSystem.Controller.Tests
         public void RegisterMaterialTestFalse()
         {
             //Arrange
-            Material material = new Material
-            {
-                Available = true,
-                ISBN = "test",
-                MaterialId = 0,
-                Type = "test"
-            };
+            Material material = getSampleMaterials()[0];
 
             using var mock = AutoMock.GetLoose();
 
@@ -68,33 +60,60 @@ namespace GTLSystem.Controller.Tests
         public void ReserveMaterialTest()
         {
             //Arrange
+            Material material = getSampleMaterials()[0];
+
+            using var mock = AutoMock.GetLoose();
+
+            mock.Mock<IMaterialRepository>()
+                .Setup(x => x.Update(material))
+                .Returns(true);
+
+            var ctrl = mock.Create<MaterialController>();
 
             //Act
+            var result = ctrl.ReserveMaterial(material);
 
             //Assert
-
+            result.Should().BeTrue();
         }
 
         [TestMethod()]
         public void GetAvailableMaterialsTest()
         {
             //Arrange
+            using var mock = AutoMock.GetLoose();
+
+            mock.Mock<IMaterialRepository>()
+                .Setup(x => x.GetAvailableMaterials())
+                .Returns(getSampleMaterials);
+
+            var ctrl = mock.Create<MaterialController>();
 
             //Act
+            var result = ctrl.GetAvailableMaterials();
 
             //Assert
-
+            result.Should().BeEquivalentTo(getSampleMaterials());
         }
 
         [TestMethod()]
         public void GetNumberOfAvailableMaterialsTest()
         {
             //Arrange
+            int? amount = 5;
+            using var mock = AutoMock.GetLoose();
+
+            mock.Mock<IMaterialRepository>()
+                .Setup(x => x.GetNumberOfAvailable())
+                .Returns(amount);
+
+            var ctrl = mock.Create<MaterialController>();
 
             //Act
+            var result = ctrl.GetNumberOfAvailableMaterials();
 
             //Assert
-
+            result.Should().Be(amount);
         }
 
         [TestMethod()]
@@ -117,6 +136,34 @@ namespace GTLSystem.Controller.Tests
 
             //Assert
 
+        }
+
+        public List<Material> getSampleMaterials()
+        {
+            return new List<Material>()
+            {
+                new Material
+                {
+                    Available = true,
+                    Type = "test",
+                    ISBN = "test",
+                    MaterialId = 0
+                },
+                new Material
+                {
+                    Available = true,
+                    Type = "test",
+                    ISBN = "test",
+                    MaterialId = 1
+                },
+                new Material
+                {
+                    Available = false,
+                    Type = "test",
+                    ISBN = "test",
+                    MaterialId = 2
+                }
+            };
         }
     }
 }

@@ -9,14 +9,6 @@ namespace GTLSystem.Controller
 {
     public class MaterialController
     {
-        //static DbConnection connection = new DbConnection();
-        //private IMaterialRepository materialRepository = new MaterialRepository(connection);
-
-        //private static IMaterialRepository materialRepository
-        //{
-        //    get => ServiceLocator.GetRequiredService<IMaterialRepository>();
-        //}
-
         IMaterialRepository _materialRepository;
 
         public MaterialController(IMaterialRepository materialRepository)
@@ -26,29 +18,12 @@ namespace GTLSystem.Controller
 
         public bool RegisterMaterial(Material material)
         {
-            bool result = true;
-
-            if (!_materialRepository.Insert(material)) result = false;
-
-            return result;
+            return _materialRepository.Insert(material);
         }
 
         public bool ReserveMaterial(Material material)
         {
-            bool result = true;
-
-            material.Available = false;
-
-            try
-            {                
-                _materialRepository.Update(material);
-            }
-            catch (Exception)
-            {
-                result = false;
-            }
-
-            return result;
+            return _materialRepository.Update(material);
         }
 
         public IEnumerable<Material> GetAvailableMaterials()
@@ -58,35 +33,12 @@ namespace GTLSystem.Controller
 
         public int? GetNumberOfAvailableMaterials()
         {
-            int? res;
-
-            try
-            {
-                res = _materialRepository.GetNumberOfAvailable();
-            }
-            catch (Exception)
-            {
-                res = -1;
-            }
-
-            return res;
-            
+            return _materialRepository.GetNumberOfAvailable();            
         }
 
         public int? GetNumberOfUnavailableMaterials()
         {
-            int? res;
-
-            try
-            {
-                res = _materialRepository.GetNumberOfUnavailable();
-            }
-            catch (Exception)
-            {
-                res = -1;
-            }
-
-            return res;
+            return _materialRepository.GetNumberOfUnavailable();
         }
 
         public IEnumerable<Material> GetAvailableByISBN(string isbn, bool available)
