@@ -8,6 +8,37 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+namespace GTLSystem.Controller.Tests
+{
+    [TestClass()]
+    public class MemberControllerTests
+    {
+        [TestMethod()]
+        public void MemberControllerTest()
+        {
+
+        }
+
+        [TestMethod()]
+        public void CheckSSNTest()
+        {
+
+        }
+
+        [TestMethod()]
+        public void GetAllMembersTest()
+        {
+
+        }
+
+        [TestMethod()]
+        public void GetBySSNTest()
+        {
+
+        }
+    }
+}
+
 namespace GTLTests
 {
     [TestClass]

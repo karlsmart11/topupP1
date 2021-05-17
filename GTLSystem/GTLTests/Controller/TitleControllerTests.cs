@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTLSystem.Controller;
+using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GTLSystem.Repository;
@@ -6,6 +7,37 @@ using GTLSystem.IRepository;
 using GTLSystem.Model;
 using FluentAssertions;
 using Autofac.Extras.Moq;
+
+namespace GTLSystem.Controller.Tests
+{
+    [TestClass()]
+    public class TitleControllerTests
+    {
+        [TestMethod()]
+        public void TitleControllerTest()
+        {
+
+        }
+
+        [TestMethod()]
+        public void RegisterTitleTest()
+        {
+
+        }
+
+        [TestMethod()]
+        public void checkISBNTest()
+        {
+
+        }
+
+        [TestMethod()]
+        public void GetByISBNTest()
+        {
+
+        }
+    }
+}
 
 namespace GTLTests
 {
