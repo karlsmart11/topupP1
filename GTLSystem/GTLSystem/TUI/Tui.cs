@@ -10,9 +10,8 @@ namespace GTLSystem.TUI
     public static class Tui
     {
         public static void GenerateLoans(int amount, ControllerContainer controllers)
-        {
-            var loancontroller = new LoanController();
-            loancontroller.GenerateLoans(amount, controllers);
+        {            
+            controllers.loanController.GenerateLoans(amount, controllers);
         }
 
         public static void Start(ControllerContainer controllers)

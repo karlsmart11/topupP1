@@ -10,9 +10,12 @@ namespace GTLSystem.Controller
 {
     public class LoanController        
     {
-        static DbConnection connection = new DbConnection();
+        private ILoanRepository _loanRepository;
 
-        private ILoanRepository loanRepository = new LoanRepository(connection);
+        public LoanController(ILoanRepository loanRepository)
+        {
+            _loanRepository = loanRepository;
+        }
 
         // Generate random loans as test data
         public bool GenerateLoans(int amount, ControllerContainer controllers)
@@ -73,7 +76,7 @@ namespace GTLSystem.Controller
 
                     try
                     {
-                        loanRepository.Insert(loan);
+                        _loanRepository.Insert(loan);
                         Console.WriteLine("Loan registered");
                     }
                     catch (Exception)
@@ -81,7 +84,7 @@ namespace GTLSystem.Controller
                         result = false;
                     }
 
-                    loan = loanRepository.GetNewestLoan();
+                    loan = _loanRepository.GetNewestLoan();
 
                     Console.WriteLine("Registering " + materials.Count() + " MaterialLoans");
 
@@ -144,14 +147,14 @@ namespace GTLSystem.Controller
 
                 try
                 {
-                    loanRepository.Insert(loan);
+                    _loanRepository.Insert(loan);
                 }
                 catch (Exception)
                 {
                     result = -1;
                 }
                 
-                loan = loanRepository.GetNewestLoan();
+                loan = _loanRepository.GetNewestLoan();
 
                 foreach (var material in materials)
                 {
@@ -171,7 +174,7 @@ namespace GTLSystem.Controller
 
         public int? GetCurrentNoOfMaterialsBySSN(string SSN)
         {
-            return loanRepository.MaterialCountBySSN(SSN);
+            return _loanRepository.MaterialCountBySSN(SSN);
         }
     }
 }
