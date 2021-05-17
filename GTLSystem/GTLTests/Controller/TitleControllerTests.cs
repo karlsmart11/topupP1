@@ -16,24 +16,23 @@ namespace GTLSystem.Controller.Tests
         [TestMethod()]
         public void TitleControllerTest()
         {
-
+            //Arrange
+            //Act
+            //Assert
         }
 
         [TestMethod()]
         public void RegisterTitleTest()
         {
-
+            //Arrange
+            //Act
+            //Assert
         }
 
         [TestMethod()]
-        public void checkISBNTest()
+        public void checkISBNCorrectTest()
         {
-
-        }
-
-        [TestMethod]
-        public void Test_Title_Get_By_Correct_ISBN()
-        {
+            //Arrange
             string input = "correct";
 
             using var mock = AutoMock.GetLoose();
@@ -43,14 +42,57 @@ namespace GTLSystem.Controller.Tests
 
             var ctrl = mock.Create<TitleController>();
 
-            var obj = ctrl.GetByISBN(input);
+            //Act
+            var result = ctrl.checkISBN(input);
 
-            obj.Should().BeEquivalentTo(GetSampleTitle());
+            //Assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod()]
+        public void checkISBNIncorrectTest()
+        {
+            //Arrange
+            string input = "incorrect";
+
+            using var mock = AutoMock.GetLoose();
+
+            mock.Mock<ITitleRepository>()
+                .Setup(x => x.GetByISBN(input)).Returns(GetSampleNullTitle());
+
+            var ctrl = mock.Create<TitleController>();
+
+            //Act
+            var result = ctrl.checkISBN(input);
+
+            //Assert
+            result.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Test_Title_Get_By_Correct_ISBN()
+        {
+            //Arrange
+            string input = "correct";
+
+            using var mock = AutoMock.GetLoose();
+
+            mock.Mock<ITitleRepository>()
+                .Setup(x => x.GetByISBN(input)).Returns(GetSampleTitle());
+
+            var ctrl = mock.Create<TitleController>();
+
+            //Act
+            var result = ctrl.GetByISBN(input);
+
+            //Assert
+            result.Should().BeEquivalentTo(GetSampleTitle());
         }
 
         [TestMethod]
         public void Test_Title_Get_By_Incorrect_ISBN()
         {
+            //Arrange
             string input = "incorrect";
 
             using var mock = AutoMock.GetLoose();
@@ -60,9 +102,11 @@ namespace GTLSystem.Controller.Tests
 
             var ctrl = mock.Create<TitleController>();
 
-            var obj = ctrl.GetByISBN(input);
+            //Act
+            var result = ctrl.GetByISBN(input);
 
-            obj.Should().BeEquivalentTo(GetSampleNullTitle());
+            //Assert
+            result.Should().BeEquivalentTo(GetSampleNullTitle());
         }
 
         private Title GetSampleNullTitle()

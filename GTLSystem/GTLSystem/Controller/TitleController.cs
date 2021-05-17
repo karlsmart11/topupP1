@@ -33,18 +33,14 @@ namespace GTLSystem.Controller
 
         public bool checkISBN(string input)
         {
-            bool res = true;
-
-            try
+            if (_titleRepository.GetByISBN(input) != null)
             {
-                _titleRepository.GetByISBN(input);
+                return true;
             }
-            catch (Exception)
+            else
             {
-                res = false;
-            }            
-
-            return res;
+                return false;
+            }         
         }
 
         public Title GetByISBN(string ISBN)
