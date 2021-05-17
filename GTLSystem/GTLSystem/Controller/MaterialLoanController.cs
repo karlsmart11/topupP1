@@ -9,8 +9,13 @@ namespace GTLSystem.Controller
 {
     public class MaterialLoanController
     {
-        static DbConnection connection = new DbConnection();
-        private IMaterialLoanRepository materialLoanRepository = new MaterialLoanRepository(connection);
+        IMaterialLoanRepository _materialLoanRepository;
+
+        public MaterialLoanController(IMaterialLoanRepository materialLoanRepository)
+        {
+            _materialLoanRepository = materialLoanRepository;
+        }
+
         public bool CreateMaterialLoan(Loan loan, Material material)
         {
             MaterialLoan materialLoan = new MaterialLoan() { LoanId = loan.LoanId, MaterialId = material.MaterialId };
@@ -18,7 +23,7 @@ namespace GTLSystem.Controller
 
             try
             {
-                materialLoanRepository.Insert(materialLoan);
+                _materialLoanRepository.Insert(materialLoan);
             }
             catch (Exception)
             {

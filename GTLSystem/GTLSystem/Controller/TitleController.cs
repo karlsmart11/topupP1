@@ -9,16 +9,19 @@ namespace GTLSystem.Controller
 {
     public class TitleController
     {
-        static DbConnection connection = new DbConnection();
+        ITitleRepository _titleRepository;
 
-        private ITitleRepository titleRepository = new TitleRepository(connection);
+        public TitleController(ITitleRepository titleRepository)
+        {
+            _titleRepository = titleRepository;
+        }
 
         public bool RegisterTitle(Title title)
         {
             bool result = true;
             try
             {
-                titleRepository.Insert(title);
+                _titleRepository.Insert(title);
             }
             catch (Exception)
             {
@@ -34,7 +37,7 @@ namespace GTLSystem.Controller
 
             try
             {
-                titleRepository.GetByISBN(input);
+                _titleRepository.GetByISBN(input);
             }
             catch (Exception)
             {
@@ -50,7 +53,7 @@ namespace GTLSystem.Controller
 
             try
             {
-                res = titleRepository.GetByISBN(ISBN);
+                res = _titleRepository.GetByISBN(ISBN);
             }
             catch (Exception)
             {

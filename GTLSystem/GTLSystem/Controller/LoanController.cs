@@ -12,12 +12,18 @@ namespace GTLSystem.Controller
     {
         static DbConnection connection = new DbConnection();
 
-        private IMemberRepository memberRepository = new MemberRepository(connection);
-        private ILoanRepository loanRepository = new LoanRepository(connection);
-        private ITitleRepository titleRepository = new TitleRepository(connection);
-        private IMaterialRepository materialRepository = new MaterialRepository(connection);
-        private MaterialController materialController = new MaterialController();
-        private MaterialLoanController materialLoanController = new MaterialLoanController();
+        IMemberRepository _memberRepository;
+        ILoanRepository _loanRepository;
+        ITitleRepository _titleRepository;
+        IMaterialRepository _materialRepository;
+
+        public LoanController(IMemberRepository memberRepository, ILoanRepository loanRepository, ITitleRepository titleRepository, IMaterialRepository materialRepository)
+        {
+            _memberRepository = memberRepository;
+            _loanRepository = loanRepository;
+            _titleRepository = titleRepository;
+            _materialRepository = materialRepository;
+        }
 
         // Generate random loans as test data
         public bool GenerateLoans(int amount)

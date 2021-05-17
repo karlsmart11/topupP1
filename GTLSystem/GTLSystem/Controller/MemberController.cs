@@ -9,24 +9,18 @@ namespace GTLSystem.Controller
 {
     public class MemberController
     {
-        //static DbConnection connection = new DbConnection();
+        IMemberRepository _memberRepository;
 
-        //private IMemberRepository memberRepository = new MemberRepository(connection);
-        private static IMemberRepository memberRepository
+        public MemberController(IMemberRepository memberRepository)
         {
-            get => ServiceLocator.GetRequiredService<IMemberRepository>();
+            _memberRepository = memberRepository;
         }
-
-        //public MemberController(IMemberRepository memberRepo)
-        //{
-        //    memberRepository = memberRepo;
-        //}
 
         public bool CheckSSN(string SSN)
         {
             bool status = true;
 
-            if (memberRepository.GetBySSN(SSN) == null)
+            if (_memberRepository.GetBySSN(SSN) == null)
             {
                 status = false;
             }
@@ -38,7 +32,7 @@ namespace GTLSystem.Controller
         {
             bool status = true;
 
-            if (memberRepository.GetAllMembers() == null)
+            if (_memberRepository.GetAllMembers() == null)
             {
                 status = false;
             }
