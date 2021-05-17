@@ -23,7 +23,7 @@ namespace GTLTests
 
             var ctrl = mock.Create<MemberController>();
 
-            var test = ctrl.GetAllMembers();
+            ctrl.GetAllMembers();
 
             mock.Mock<IMemberRepository>()
                 .Verify(x => x.GetAllMembers(), Times.Exactly(1));
