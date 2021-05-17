@@ -12,12 +12,22 @@ namespace GTLSystem.Controller.Tests
         [TestMethod()]
         public void MaterialLoanControllerTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
 
         [TestMethod()]
         public void CreateMaterialLoanTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
     }

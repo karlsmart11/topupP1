@@ -16,12 +16,22 @@ namespace GTLSystem.Controller.Tests
         [TestMethod()]
         public void MemberControllerTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
 
         [TestMethod()]
         public void CheckSSNTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
 
@@ -44,6 +54,11 @@ namespace GTLSystem.Controller.Tests
         [TestMethod()]
         public void GetBySSNTest()
         {
+            //Arrange
+
+            //Act
+
+            //Assert
 
         }
 
