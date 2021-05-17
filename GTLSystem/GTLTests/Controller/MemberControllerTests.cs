@@ -28,25 +28,6 @@ namespace GTLSystem.Controller.Tests
         [TestMethod()]
         public void GetAllMembersTest()
         {
-
-        }
-
-        [TestMethod()]
-        public void GetBySSNTest()
-        {
-
-        }
-    }
-}
-
-namespace GTLTests
-{
-    [TestClass]
-    class MemberControllerTests
-    {
-        [TestMethod]
-        public void Test_GetAllMembers()
-        {
             using var mock = AutoMock.GetLoose();
 
             mock.Mock<IMemberRepository>()
@@ -58,6 +39,12 @@ namespace GTLTests
 
             mock.Mock<IMemberRepository>()
                 .Verify(x => x.GetAllMembers(), Times.Exactly(1));
+        }
+
+        [TestMethod()]
+        public void GetBySSNTest()
+        {
+
         }
 
         private IEnumerable<Member> GetSampleMembers()

@@ -22,11 +22,3 @@ namespace GTLSystem.Controller.Tests
         }
     }
 }
-
-namespace GTLTests
-{
-    [TestClass]
-    class MaterialLoanControllerTests
-    {
-    }
-}
