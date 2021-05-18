@@ -7,6 +7,6 @@ namespace GTLSystem.IRepository
 {
     public interface IMaterialLoanRepository
     {
-        bool Insert(MaterialLoan materialLoan);
+        bool Insert(Loan loan, Material material);
     }
 }

@@ -22,8 +22,9 @@ namespace GTLSystem.Repository
             this.connection = connection;
         }
 
-        public bool Insert(MaterialLoan materialLoan)
+        public bool Insert(Loan loan, Material material)
         {
+            MaterialLoan materialLoan = new MaterialLoan() { LoanId = loan.LoanId, MaterialId = material.MaterialId };
             bool result = true;
             var con = connection.CreateConnection();
 

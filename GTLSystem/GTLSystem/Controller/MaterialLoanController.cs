@@ -18,19 +18,7 @@ namespace GTLSystem.Controller
 
         public bool CreateMaterialLoan(Loan loan, Material material)
         {
-            MaterialLoan materialLoan = new MaterialLoan() { LoanId = loan.LoanId, MaterialId = material.MaterialId };
-            bool result = true;
-
-            try
-            {
-                _materialLoanRepository.Insert(materialLoan);
-            }
-            catch (Exception)
-            {
-                result = false;
-            }
-
-            return result;
+            return _materialLoanRepository.Insert(loan, material);        
         }
     }
 }
