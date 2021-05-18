@@ -33,6 +33,7 @@ namespace GTLSystem.Controller
             return _materialRepository.GetAvailableMaterials();
         }
 
+
         public int? GetNumberOfAvailableMaterials()
         {
             return _materialRepository.GetNumberOfAvailable();            

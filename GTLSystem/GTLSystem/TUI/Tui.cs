@@ -70,6 +70,8 @@ namespace GTLSystem.TUI
 
             AnyKey();
         }
+
+        // Generates a number of random loans for testing the database
         public static void GenerateLoans(ControllerContainer controllers)
         {
             Console.Write("Enter the amount of loans to generate: ");
