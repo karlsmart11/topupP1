@@ -38,6 +38,7 @@ namespace GTLSystem.Controller.Tests
         [TestMethod()]
         public void GetAllMembersTest()
         {
+            //Arrange
             using var mock = AutoMock.GetLoose();
 
             mock.Mock<IMemberRepository>()
@@ -45,8 +46,10 @@ namespace GTLSystem.Controller.Tests
 
             var ctrl = mock.Create<MemberController>();
 
+            //Act
             ctrl.GetAllMembers();
 
+            //Assert
             mock.Mock<IMemberRepository>()
                 .Verify(x => x.GetAllMembers(), Times.Exactly(1));
         }

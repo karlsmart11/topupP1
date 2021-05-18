@@ -23,6 +23,8 @@ namespace GTLSystem.Controller
 
         public bool ReserveMaterial(Material material)
         {
+            material.Available = false;
+
             return _materialRepository.Update(material);
         }
 

@@ -7,10 +7,6 @@ namespace GTLSystem.TUI
 {
     public static class Tui
     {
-        public static void GenerateLoans(int amount, ControllerContainer controllers)
-        {            
-            controllers.loanController.GenerateLoans(amount, controllers);
-        }
 
         public static void Start(ControllerContainer controllers)
         {
@@ -70,6 +66,27 @@ namespace GTLSystem.TUI
             if (res == -1)
             {
                 Console.WriteLine("Failed to register Loan");
+            }
+
+            AnyKey();
+        }
+        public static void GenerateLoans(ControllerContainer controllers)
+        {
+            Console.Write("Enter the amount of loans to generate: ");
+            try
+            {                
+                int amount = int.Parse(Console.ReadLine());
+
+                if (amount < 0) throw new Exception("negative number");
+
+                controllers.loanController.GenerateLoans(amount, controllers);
+
+                Console.WriteLine("Loans Generated Successfully");
+                Console.WriteLine();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid number, please enter valid positive integer");
             }
 
             AnyKey();
@@ -137,6 +154,7 @@ namespace GTLSystem.TUI
             Console.WriteLine("2: Number of available materials");
             Console.WriteLine("3: Number of unavailable materials");
             Console.WriteLine("4: Get information on a title");
+            Console.WriteLine("5: Generate loans");
             Console.WriteLine();
 
             Console.Write("Select entry: ");
@@ -168,6 +186,9 @@ namespace GTLSystem.TUI
                         break;
                     case 4:
                         GetTitleByISBN(controllers);
+                        break;
+                    case 5:
+                        GenerateLoans(controllers);
                         break;
                 }
 

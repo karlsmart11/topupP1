@@ -8,6 +8,7 @@ using Autofac.Extras.Moq;
 using GTLSystem.IRepository;
 using FluentAssertions;
 using System.Linq;
+using Moq;
 
 namespace GTLSystem.Controller.Tests
 {
@@ -94,13 +95,16 @@ namespace GTLSystem.Controller.Tests
 
             //Assert
             result.Should().BeEquivalentTo(getSampleMaterials());
+
+            mock.Mock<IMaterialRepository>()
+            .Verify(x => x.GetAvailableMaterials(), Times.Exactly(1));
         }
 
         [TestMethod()]
         public void GetNumberOfAvailableMaterialsTest()
         {
             //Arrange
-            int? amount = 5;
+            int? amount = 1;
             using var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialRepository>()
@@ -120,22 +124,41 @@ namespace GTLSystem.Controller.Tests
         public void GetNumberOfUnavailableMaterialsTest()
         {
             //Arrange
+            int? amount = 1;
+            using var mock = AutoMock.GetLoose();
+
+            mock.Mock<IMaterialRepository>()
+                .Setup(x => x.GetNumberOfUnavailable())
+                .Returns(amount);
+
+            var ctrl = mock.Create<MaterialController>();
 
             //Act
+            var result = ctrl.GetNumberOfUnavailableMaterials();
 
             //Assert
-
+            result.Should().Be(amount);
         }
 
         [TestMethod()]
         public void GetAvailableByISBNTest()
         {
             //Arrange
+            using var mock = AutoMock.GetLoose();
+            var isbn = "test";
+            var availability = true;
+
+            mock.Mock<IMaterialRepository>()
+                .Setup(x => x.GetAvailableByISBN(isbn, availability))
+                .Returns(getSampleMaterials);
+
+            var ctrl = mock.Create<MaterialController>();
 
             //Act
+            var result = ctrl.GetAvailableByISBN(isbn, availability);
 
             //Assert
-
+            result.Should().BeEquivalentTo(getSampleMaterials());
         }
 
         public List<Material> getSampleMaterials()

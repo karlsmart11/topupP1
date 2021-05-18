@@ -18,14 +18,7 @@ namespace GTLSystem.Controller
 
         public bool RegisterTitle(Title title)
         {
-            if (_titleRepository.Insert(title))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return _titleRepository.Insert(title);
         }
 
         public bool checkISBN(string input)
@@ -37,23 +30,12 @@ namespace GTLSystem.Controller
             else
             {
                 return false;
-            }         
+            }
         }
 
         public Title GetByISBN(string ISBN)
         {
-            Title res;
-
-            try
-            {
-                res = _titleRepository.GetByISBN(ISBN);
-            }
-            catch (Exception)
-            {
-                res = null;                
-            }
-
-            return res;
+            return _titleRepository.GetByISBN(ISBN);
         }
     }
 }
