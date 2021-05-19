@@ -1,4 +1,5 @@
-﻿using GTLSystem.Repository;
+﻿using GTLSystem.IRepository;
+using GTLSystem.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,15 +10,17 @@ namespace GTLSystem.Controller
 
     public class ControllerContainer
     {
-        private DbConnection _connection;
-        public ControllerContainer(DbConnection connection)
+        public ControllerContainer(IMaterialRepository materialRepository,
+                                   IMaterialLoanRepository materialLoanRepository,
+                                   ITitleRepository titleRepository,
+                                   IMemberRepository memberRepository,
+                                   ILoanRepository loanRepository)
         {
-            _connection = connection;
-            materialController = new MaterialController(new MaterialRepository(_connection));
-            materialLoanController = new MaterialLoanController(new MaterialLoanRepository(_connection));
-            titleController = new TitleController(new TitleRepository(_connection));
-            memberController = new MemberController(new MemberRepository(_connection));
-            loanController = new LoanController(new LoanRepository(_connection));
+            materialController = new MaterialController(materialRepository);
+            materialLoanController = new MaterialLoanController(materialLoanRepository);
+            titleController = new TitleController(titleRepository);
+            memberController = new MemberController(memberRepository);
+            loanController = new LoanController(loanRepository);
         }
 
         public MaterialController materialController;

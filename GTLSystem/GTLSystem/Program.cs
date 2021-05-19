@@ -8,8 +8,14 @@ namespace GTLSystem
     {
         static void Main(string[] args)
         {
+            var db = new DbConnection();
+            var materialRepository = new MaterialRepository(db);
+            var materialLoanRepository = new MaterialLoanRepository(db);
+            var titleRepository = new TitleRepository(db);
+            var memberRepository = new MemberRepository(db);
+            var loanRepository = new LoanRepository(db);
 
-            ControllerContainer controllerContainer = new ControllerContainer(new DbConnection());
+            ControllerContainer controllerContainer = new ControllerContainer(materialRepository, materialLoanRepository, titleRepository, memberRepository, loanRepository);
 
             Tui.Start(controllerContainer);
 

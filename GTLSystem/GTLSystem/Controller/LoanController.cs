@@ -110,6 +110,11 @@ namespace GTLSystem.Controller
             return result;
         }
 
+        public IEnumerable<Material> test(ControllerContainer controllers)
+        {
+            return controllers.materialController.GetAvailableByISBN("isbn", true);
+        }
+
         public int RegisterLoan(String ssn, List<string> isbns, ControllerContainer controllers)
         {
             int result = 1;

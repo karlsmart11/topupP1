@@ -15,16 +15,11 @@ namespace GTLSystem.Controller.Tests
     [TestClass()]
     public class LoanControllerTests
     {
-        //Member member = controllers.memberController.GetBySSN(ssn);
-        //var material = controllers.materialController.GetAvailableByISBN(isbn, true);
-        //controllers.materialController.ReserveMaterial(material.First());
-        //controllers.materialLoanController.CreateMaterialLoan(loan, material);
         [TestMethod()]
         public void RegisterLoanTest()
         {
             //Arrange
             using var mock = AutoMock.GetLoose();
-            var controllers = mock.Create<ControllerContainer>();
             string ssn = "ssn";
             bool availability = true;
             var isbns = new List<string>
@@ -59,6 +54,8 @@ namespace GTLSystem.Controller.Tests
                 .Returns(true);
 
             var ctrl = mock.Create<LoanController>();
+
+            var controllers = mock.Create<ControllerContainer>();
 
             //Act
             var result = ctrl.RegisterLoan(ssn, isbns, controllers);
