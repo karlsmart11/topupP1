@@ -52,7 +52,6 @@ namespace GTLSystem.Repository
             bool result = true;
             var con = connection.CreateConnection();
 
-
             string insertQuery = @"INSERT INTO Loan
            (StartDate,
             MemberSSN)

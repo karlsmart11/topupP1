@@ -150,27 +150,18 @@ namespace GTLSystem.Controller
                     MemberSSN = member.SSN
                 };
 
-                try
+                if (_loanRepository.Insert(loan))
                 {
-                    _loanRepository.Insert(loan);
+                    loan = _loanRepository.GetNewestLoan();
+
+                    foreach (var material in materials)
+                    {
+                        if (!controllers.materialLoanController.CreateMaterialLoan(loan, material)) result = -1;
+                    }
                 }
-                catch (Exception)
+                else
                 {
                     result = -1;
-                }
-                
-                loan = _loanRepository.GetNewestLoan();
-
-                foreach (var material in materials)
-                {
-                    try
-                    {
-                        controllers.materialLoanController.CreateMaterialLoan(loan, material);
-                    }
-                    catch (Exception)
-                    {
-                        result = -1;
-                    }                    
                 }
             }
 
