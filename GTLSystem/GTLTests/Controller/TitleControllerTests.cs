@@ -19,7 +19,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             var title = GetSampleTitle();
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<ITitleRepository>()
                 .Setup(x => x.Insert(title)).Returns(true);
@@ -39,7 +39,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             var title = GetSampleNullTitle();
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<ITitleRepository>()
                 .Setup(x => x.Insert(title)).Returns(false);
@@ -59,7 +59,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             string input = "correct";
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<ITitleRepository>()
                 .Setup(x => x.GetByISBN(input)).Returns(GetSampleTitle());
@@ -79,7 +79,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             string input = "incorrect";
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<ITitleRepository>()
                 .Setup(x => x.GetByISBN(input)).Returns(GetSampleNullTitle());
@@ -99,7 +99,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             string input = "correct";
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<ITitleRepository>()
                 .Setup(x => x.GetByISBN(input)).Returns(GetSampleTitle());
@@ -119,7 +119,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             string input = "incorrect";
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<ITitleRepository>()
                 .Setup(x => x.GetByISBN(input)).Returns(GetSampleNullTitle);

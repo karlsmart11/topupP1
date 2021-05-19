@@ -1,12 +1,13 @@
-﻿using Autofac.Extras.Moq;
-using GTLSystem.Controller;
-using GTLSystem.IRepository;
-using GTLSystem.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using GTLSystem.Controller;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GTLSystem.Repository;
+using GTLSystem.IRepository;
+using GTLSystem.Model;
+using FluentAssertions;
+using Autofac.Extras.Moq;
+using Moq;
 
 namespace GTLSystem.Controller.Tests
 {
@@ -14,32 +15,29 @@ namespace GTLSystem.Controller.Tests
     public class MemberControllerTests
     {
         [TestMethod()]
-        public void MemberControllerTest()
-        {
-            //Arrange
-
-            //Act
-
-            //Assert
-
-        }
-
-        [TestMethod()]
         public void CheckSSNTest()
         {
             //Arrange
+            string ssn = "ssn";
+            var mock = AutoMock.GetLoose();
+
+            mock.Mock<IMemberRepository>()
+                .Setup(x => x.GetBySSN(ssn)).Returns(GetSampleMember());
+
+            var ctrl = mock.Create<MemberController>();
 
             //Act
+            var result = ctrl.GetBySSN(ssn);
 
             //Assert
-
+            result.Should().BeEquivalentTo(GetSampleMember());
         }
 
         [TestMethod()]
         public void GetAllMembersTest()
         {
             //Arrange
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMemberRepository>()
                 .Setup(x => x.GetAllMembers()).Returns(GetSampleMembers());
@@ -47,22 +45,29 @@ namespace GTLSystem.Controller.Tests
             var ctrl = mock.Create<MemberController>();
 
             //Act
-            ctrl.GetAllMembers();
+            var result = ctrl.GetAllMembers();
 
             //Assert
-            mock.Mock<IMemberRepository>()
-                .Verify(x => x.GetAllMembers(), Times.Exactly(1));
+            result.Should().BeEquivalentTo(GetSampleMembers());
         }
 
         [TestMethod()]
         public void GetBySSNTest()
         {
             //Arrange
+            string ssn = "ssn";
+            var mock = AutoMock.GetLoose();
+
+            mock.Mock<IMemberRepository>()
+                .Setup(x => x.GetBySSN(ssn)).Returns(GetSampleMember());
+
+            var ctrl = mock.Create<MemberController>();
 
             //Act
+            var result = ctrl.GetBySSN(ssn);
 
             //Assert
-
+            result.Should().BeEquivalentTo(GetSampleMember());
         }
 
         private IEnumerable<Member> GetSampleMembers()
@@ -95,6 +100,18 @@ namespace GTLSystem.Controller.Tests
                 }
             };
             return output;
+        }
+
+        private Member GetSampleMember()
+        {
+            return new Member
+            {
+                SSN = "test",
+                Campus = "testcampus",
+                Address = "testaddress",
+                PhoneNumber = "testphone",
+                CardExpDate = DateTime.MinValue
+            };
         }
     }
 }
