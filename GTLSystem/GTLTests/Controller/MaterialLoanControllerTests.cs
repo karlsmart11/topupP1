@@ -19,7 +19,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             var loan = GetSampleLoan();
             var material = GetSampleMaterial();
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialLoanRepository>()
                 .Setup(x => x.Insert(loan, material)).Returns(true);
@@ -40,7 +40,7 @@ namespace GTLSystem.Controller.Tests
             var loan = GetSampleLoan();
             var material = GetSampleMaterial();
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialLoanRepository>()
                 .Setup(x => x.Insert(loan, material)).Returns(false);

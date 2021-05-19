@@ -21,7 +21,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             Material material = getSampleMaterials()[0];
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialRepository>()
                 .Setup(x => x.Insert(material))
@@ -42,7 +42,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             Material material = getSampleMaterials()[0];
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialRepository>()
                 .Setup(x => x.Insert(material))
@@ -63,7 +63,7 @@ namespace GTLSystem.Controller.Tests
             //Arrange
             Material material = getSampleMaterials()[0];
 
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialRepository>()
                 .Setup(x => x.Update(material))
@@ -82,7 +82,7 @@ namespace GTLSystem.Controller.Tests
         public void GetAvailableMaterialsTest()
         {
             //Arrange
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialRepository>()
                 .Setup(x => x.GetAvailableMaterials())
@@ -105,7 +105,7 @@ namespace GTLSystem.Controller.Tests
         {
             //Arrange
             int? amount = 1;
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialRepository>()
                 .Setup(x => x.GetNumberOfAvailable())
@@ -125,7 +125,7 @@ namespace GTLSystem.Controller.Tests
         {
             //Arrange
             int? amount = 1;
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
 
             mock.Mock<IMaterialRepository>()
                 .Setup(x => x.GetNumberOfUnavailable())
@@ -144,7 +144,7 @@ namespace GTLSystem.Controller.Tests
         public void GetAvailableByISBNTest()
         {
             //Arrange
-            using var mock = AutoMock.GetLoose();
+            var mock = AutoMock.GetLoose();
             var isbn = "test";
             var availability = true;
 
