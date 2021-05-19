@@ -15,22 +15,41 @@ namespace GTLSystem.Controller.Tests
     public class MemberControllerTests
     {
         [TestMethod()]
-        public void CheckSSNTest()
+        public void CheckCorrectSSNTest()
         {
             //Arrange
             string ssn = "ssn";
             var mock = AutoMock.GetLoose();
 
             mock.Mock<IMemberRepository>()
-                .Setup(x => x.GetBySSN(ssn)).Returns(GetSampleMember());
+                .Setup(x => x.GetBySSN(ssn)).Returns(GetSampleMember);
 
             var ctrl = mock.Create<MemberController>();
 
             //Act
-            var result = ctrl.GetBySSN(ssn);
+            var result = ctrl.CheckSSN(ssn);
 
             //Assert
-            result.Should().BeEquivalentTo(GetSampleMember());
+            result.Should().BeTrue();
+        }
+
+        [TestMethod()]
+        public void CheckIncorrectSSNTest()
+        {
+            //Arrange
+            string ssn = "wrongssn";
+            var mock = AutoMock.GetLoose();
+
+            mock.Mock<IMemberRepository>()
+                .Setup(x => x.GetBySSN(ssn)).Returns(GetSampleNullMember);
+
+            var ctrl = mock.Create<MemberController>();
+
+            //Act
+            var result = ctrl.CheckSSN(ssn);
+
+            //Assert
+            result.Should().BeFalse();
         }
 
         [TestMethod()]
@@ -112,6 +131,11 @@ namespace GTLSystem.Controller.Tests
                 PhoneNumber = "testphone",
                 CardExpDate = DateTime.MinValue
             };
+        }
+
+        private Member GetSampleNullMember()
+        {
+            return null;
         }
     }
 }
